@@ -1,161 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Demonstrandum — machine-verified mathematics</title>
-<meta name="description" content="Demonstrandum is a verification-first, multi-agent AI mathematics pipeline. No claim is accepted on an AI's word: every result is an artifact on disk plus an independently written checker that accepts it.">
-<style>
-  :root{
-    --bg:#ffffff; --fg:#16181d; --muted:#5b6470; --line:#e4e7ec;
-    --card:#f7f8fa; --accent:#0b5bd3; --accent-fg:#ffffff;
-    --code-bg:#f2f4f7; --grade-kernel-bg:#0b7a3b; --grade-mid-bg:#3a4657;
-    --maxw:52rem;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#0d1015; --fg:#e7eaef; --muted:#98a2b3; --line:#242a33;
-      --card:#151a21; --accent:#5b9bff; --accent-fg:#0d1015;
-      --code-bg:#12161c; --grade-kernel-bg:#1f9e57; --grade-mid-bg:#4a5568;
-    }
-  }
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0; background:var(--bg); color:var(--fg);
-    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 1.25rem}
-  a{color:var(--accent); text-decoration:none}
-  a:hover{text-decoration:underline}
-  header.masthead{border-bottom:1px solid var(--line); padding:3.5rem 0 2.25rem}
-  .brand{font-size:2.4rem; font-weight:700; letter-spacing:-.02em; margin:0}
-  .tagline{font-size:1.15rem; color:var(--muted); margin:.4rem 0 0; font-weight:500}
-  main section{padding:2.5rem 0; border-bottom:1px solid var(--line)}
-  h2{font-size:1.35rem; letter-spacing:-.01em; margin:0 0 1rem}
-  p{margin:0 0 1rem}
-  .lede p:last-child{margin-bottom:0}
-  .muted{color:var(--muted)}
-  .table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0 -0.1rem}
-  table{border-collapse:collapse; width:100%; font-size:.94rem; min-width:34rem}
-  th,td{text-align:left; padding:.6rem .7rem; border-bottom:1px solid var(--line); vertical-align:top}
-  th{font-size:.78rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600}
-  tbody tr:hover{background:var(--card)}
-  .grade{display:inline-block; font-size:.72rem; font-weight:600; letter-spacing:.02em;
-    padding:.15rem .5rem; border-radius:999px; white-space:nowrap; color:#fff}
-  .g-kernel{background:var(--grade-kernel-bg)}
-  .g-dual{background:var(--grade-mid-bg)}
-  .g-audit{background:transparent; color:var(--muted); border:1px solid var(--line)}
-  .legend{font-size:.9rem; color:var(--muted); margin-top:1rem}
-  .legend b{color:var(--fg)}
-  pre{background:var(--code-bg); border:1px solid var(--line); border-radius:8px;
-    padding:1rem 1.1rem; overflow-x:auto; font-size:.88rem; line-height:1.55; margin:0 0 1rem}
-  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-  p code, li code{background:var(--code-bg); padding:.1rem .35rem; border-radius:4px; font-size:.9em}
-  .cards{display:grid; gap:.9rem; grid-template-columns:1fr}
-  .card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem 1.1rem}
-  .card h3{margin:0 0 .3rem; font-size:1rem}
-  .card p{margin:0; font-size:.92rem; color:var(--muted)}
-  ul.plain{margin:.25rem 0 0; padding-left:1.1rem}
-  ul.plain li{margin:.2rem 0}
-  footer{padding:2.5rem 0 3.5rem; font-size:.94rem; color:var(--muted)}
-  footer .contact{display:flex; flex-wrap:wrap; gap:.4rem 1.4rem; margin-bottom:1rem}
-  footer .fine{font-size:.82rem}
-  @media (max-width:480px){
-    header.masthead{padding:2.5rem 0 1.75rem}
-    .brand{font-size:1.95rem}
-  }
-</style>
-</head>
-<body>
-<header class="masthead">
-  <div class="wrap">
-    <h1 class="brand">Demonstrandum</h1>
-    <p class="tagline">Machine-verified mathematics.</p>
-  </div>
-</header>
-
-<main>
-  <section class="lede">
-    <div class="wrap">
-      <p>Demonstrandum is a verification-first, multi-agent AI mathematics pipeline, directed and audited by John Erlbacher (Independent Researcher). Its house rule is that no claim is ever accepted on an AI's word: the unit of progress is an artifact on disk plus an independently written checker that accepts it. Every result below is mechanically checkable by a reader with zero trust in any AI or in the author.</p>
-      <p class="muted">Wave 1 delivered 13 verified results — 11 refutations of published conjectures, one proof of a published conjecture, and one numerical record — each frozen verbatim from its source before attack and backed by a runnable certificate or a Lean 4 proof accepted by the kernel.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2>Results</h2>
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr><th>Result</th><th>Grade</th><th>Artifact</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>IRIS Conjecture 6.1 ("NuevaMirada") — refuted</td><td><span class="grade g-dual">dual-checker</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Discrete Borsuk Conjecture 3 (arXiv:2508.20009) — disproved in Lean 4</td><td><span class="grade g-kernel">kernel</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/borsuk">paper</a></td></tr>
-            <tr><td>Graffiti Conjecture 143 — refuted</td><td><span class="grade g-dual">dual-checker</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/graffiti-143-154">paper</a></td></tr>
-            <tr><td>Graffiti Conjecture 154 (std-dev reading) — refuted</td><td><span class="grade g-dual">dual-checker</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/graffiti-143-154">paper</a></td></tr>
-            <tr><td>TxGraffiti / Davila Conjecture 9 — refuted</td><td><span class="grade g-dual">dual-checker</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Pandey parity conjecture — refuted (both directions)</td><td><span class="grade g-dual">dual-checker</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Solubilizer Conjecture A.1 (arXiv:2412.16177) — refuted</td><td><span class="grade g-dual">dual-checker</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Solubilizer Conjecture A.13 — refuted</td><td><span class="grade g-audit">audit-panel</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Solubilizer Conjecture A.16 — refuted</td><td><span class="grade g-audit">audit-panel</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Sun Conjecture 4.6 (arXiv:2108.07723) — refuted at p = 29</td><td><span class="grade g-dual">dual-checker</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/sun-46">paper</a></td></tr>
-            <tr><td>Koch–Narayan Conjecture 1 — refuted</td><td><span class="grade g-dual">dual-checker</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>C(13) ≥ 36 record ("no 5 on a sphere") — improves C(12) ≥ 33</td><td><span class="grade g-dual">dual-checker</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/no5sphere-record">paper</a></td></tr>
-            <tr><td>Elizalde–Luo {1132, 3312} conjecture — proved in Lean 4</td><td><span class="grade g-kernel">kernel</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/elizalde-luo">paper</a></td></tr>
-            <tr><td>Erdős Problem #866 — eventual value h₄(n) = 4 for all n ≥ 331,777 (Choi–Erdős–Szemerédi constant), proved in Lean 4</td><td><span class="grade g-kernel">kernel</span> <span class="grade g-dual">dual-checker</span></td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p4-erdos866/paper/draft-866.pdf">paper</a> · <a href="https://github.com/demonstrandum-research/artifacts/tree/main/problems/p4-erdos866">artifacts</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="legend"><b>kernel</b> — the entire claim is a Lean 4 theorem accepted by the Lean kernel under only the three standard mathlib axioms. <b>dual-checker</b> — certificate accepted by ≥ 2 independently written checkers plus mutation testing. <b>audit-panel</b> — banked runnable checker plus adversarial clean-room audits across model families. Exact statements, verbatim frozen sources, and a per-result "what this does <em>not</em> show" caveat are in <a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a>.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2>Verify it yourself</h2>
-      <p>The complete wave-1 bundle carries a one-command master verification battery. No trust required.</p>
-<pre><code>git clone https://github.com/demonstrandum-research/artifacts.git
-cd artifacts
-python verify_all.py            # default battery: 33 checks, ~5-15 min
-python verify_all.py --strict   # SKIPs become failures (full zero-trust mode)
-python verify_all.py --list     # list all checks; --only SUBSTR runs a subset</code></pre>
-      <p class="muted">Requirements: Python 3.10+ with <code>numpy</code> and <code>sympy</code>. A SKIP always means "not verified on this machine" — the summary says so loudly. See <a href="https://github.com/demonstrandum-research/artifacts/blob/main/VALIDATION.md">VALIDATION.md</a> for what each check does and does not establish.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2>Papers</h2>
-      <p>Nine papers accompany the results. Each carries LaTeX source, compiled PDF, build notes, referee-round responses, and recompute scripts. The archived, citable snapshot is on Zenodo.</p>
-      <div class="cards">
-        <div class="card"><h3>Archived snapshot (DOI)</h3><p><a href="https://doi.org/10.5281/zenodo.21264100">10.5281/zenodo.21264100</a> — <em>Demonstrandum verified artifacts: eight papers in combinatorics</em> (v2). Discrete Borsuk, Elizalde–Luo, Sun 4.6, no-5-on-a-sphere record, Graffiti 143 &amp; 154, and the union-closed-sets flagship, plus verification code bundles.</p></div>
-        <div class="card"><h3>Source &amp; verification battery</h3><p><a href="https://github.com/demonstrandum-research/artifacts">github.com/demonstrandum-research/artifacts</a> — complete artifact repository: certificates, independent checkers, mutation suites, Lean projects, and <code>verify_all.py</code>.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2>Methods &amp; AI-use disclosure</h2>
-      <p>Results are produced by a multi-agent workflow built on Claude language models (Anthropic), with adversarial cross-checks by a different model family (OpenAI Codex/GPT). AI agents propose constructions, write checkers and proofs, and audit each other under a protocol in which nothing is accepted on a model's word: every accepted claim is backed by a machine-verifiable artifact (certificate plus independent checkers, or a Lean proof accepted by the kernel). Statements are frozen verbatim from their authoritative sources before any attack. A human — the author — directs the campaigns, audits every gate, and takes full responsibility for the claims.</p>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <div class="contact">
-      <span>John Erlbacher · Independent Researcher</span>
-      <a href="mailto:erlbacher.research@gmail.com">erlbacher.research@gmail.com</a>
-      <a href="https://orcid.org/0009-0003-6851-4139">ORCID 0009-0003-6851-4139</a>
-      <a href="https://github.com/demonstrandum-research">github.com/demonstrandum-research</a>
-    </div>
-    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Every result on this page is mechanically checkable from the artifacts repository.</p>
-  </div>
-</footer>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Machine-verified mathematics · Demonstrandum</title><meta name="description" content="Demonstrandum — machine-verified mathematics."><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>
+      // Theme bootstrap: runs before paint; localStorage only; no network.
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script><link rel="stylesheet" href="/_astro/about.DJDRClQS.css"></head> <body> <header class="site-header"> <div class="container"> <a class="brand" href="/">Demonstrandum
+<span class="tagline">quod erat — machine-verified mathematics</span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/">Results</a> <a href="/notes/">Lab&nbsp;Notes</a> <a href="/about/">About</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Aa</button> </nav> </div> </header> <main> <div class="container">  <h1>Mathematics you can check without trusting us.</h1> <p class="lede">
+Demonstrandum is an autonomous mathematical research system directed by its
+    author. Its defining discipline is that no claim rests on any model's
+    output: every result is reduced to independently checkable artifacts —
+    kernel-checked Lean proofs, exact certificates verifiable by standard
+    third-party tools, or dual independently implemented exact computations —
+    before it is stated.
+</p> <p>
+The system's outputs are fully transparent and reproducible from the
+    accompanying artifacts (<a href="/about/#methodology">methodology</a>), and
+    the author takes sole responsibility for all claims.
+</p> <h2>Results</h2> <p>One page per confirmed result: the exact statement, a
+  plain-language account, the artifacts, the reproduction commands, and the
+  verification trail.</p> <ul class="listing"> <li> <a class="item-title" href="/results/erdos-866/">Erdős Problem 866: the eventual value of h₄, and improved bounds for the Choi–Erdős–Szemerédi pairwise-sums problem</a> <p class="item-desc">h₄(n) = 4 for all n ≥ 331,777 (Lean-kernel), the first strict g/h separation beyond k = 3, a factor-32 improvement for g₅, and exact small values certified by dual SAT engines with formally verified proof checking.</p> <p class="meta-line">  <span class="badge badge-grade">Lean kernel + DRAT/LRAT (cake_lpr)</span> July 2026 · Zenodo DOI 10.5281/zenodo.21269439 </p> </li> </ul> <h2>Lab notes</h2> <p>Longer writeups: the mathematics behind the results, explained for
+  correspondents and curious readers.</p> <ul class="listing"> <li> <a class="item-title" href="/notes/how-to-check-us/">How to check us: a field guide to Demonstrandum&#39;s certificates</a> <p class="item-desc">Kernel proofs, DRAT/LRAT certificates, interval certificates, dual computations — what each artifact class does and does not guarantee, and how to verify one yourself in minutes.</p> <p class="meta-line">  2026-07-10 </p> </li> </ul>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Produced by Demonstrandum, the author's autonomous research system, which orchestrates frontier AI models within a proprietary verification-first architecture. No claim rests on a model's word: every result reduces to independently checkable artifacts. Author: John Erlbacher.</p> <p>No trackers, no analytics, no cookies (a single <code>localStorage</code> key remembers your theme). All math prerendered; no client-side math JS.</p> <p><a href="/about/#contact">Contact</a> · <a href="/about/#methodology">Methodology</a></p> </div> </footer> <script>
+      (function () {
+        var btn = document.getElementById('theme-toggle');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          var root = document.documentElement;
+          var current = root.dataset.theme ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          var next = current === 'dark' ? 'light' : 'dark';
+          root.dataset.theme = next;
+          try { localStorage.setItem('theme', next); } catch (e) {}
+        });
+      })();
+    </script> </body> </html>
