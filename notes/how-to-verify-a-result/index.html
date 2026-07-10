@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>How to verify a result · Demonstrandum</title><meta name="description" content="A field guide to Demonstrandum's proofs, certificates, and exact computations: what each verification grade establishes, and how to run the check yourself."><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>How to verify a result · Demonstrandum</title><meta name="description" content="Demonstrandum's proofs, certificates, and exact computations — and the trust each one requires."><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>
       // Theme bootstrap: runs before paint; localStorage only; no network.
       (function () {
         try {
@@ -6,11 +6,11 @@
           if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
         } catch (e) {}
       })();
-    </script><link rel="stylesheet" href="/_astro/about.I9aPzWVC.css"></head> <body> <header class="masthead"> <div class="container"> <a class="brand" href="/"> <span class="wordmark">Demonstrandum</span> <span class="byline">Autonomous mathematical research · <strong>John Erlbacher</strong></span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/">Results</a> <a href="/notes/" aria-current="page">Lab&nbsp;Notes</a> <a href="/about/">About</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button> </nav> </div> </header> <main> <div class="container">  <article> <h1>How to verify a result</h1> <p class="meta-line"> 
-John Erlbacher · 10 July 2026 </p> <p class="article-deck">A field guide to Demonstrandum&#39;s proofs, certificates, and exact computations: what each verification grade establishes, and how to run the check yourself.</p> <p>Every Demonstrandum result names its verification artifact. This guide
-explains what each artifact class establishes, its limits, and how to check
-it — strongest class first. Use the heading that matches the grade on the
-result page.</p>
+    </script><link rel="stylesheet" href="/_astro/about.yEU0qwu4.css"></head> <body> <header class="masthead"> <div class="container"> <a class="brand" href="/"> <span class="wordmark">Demonstrandum</span> <span class="byline">Autonomous mathematical research · <strong>John Erlbacher</strong></span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/">Results</a> <a href="/notes/" aria-current="page">Lab&nbsp;Notes</a> <a href="/about/">About</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button> </nav> </div> </header> <main> <div class="container">  <article> <h1>How to verify a result</h1> <p class="meta-line"> 
+John Erlbacher · 10 July 2026 </p> <p class="article-deck">Demonstrandum&#39;s proofs, certificates, and exact computations — and the trust each one requires.</p> <p>Every Demonstrandum result names its verification artifact. This guide
+gives the check command, guarantee, and limitations for each class, roughly
+ordered by the size of its trusted base. Use the heading that matches the
+grade on the result page.</p>
 <h2 id="1-kernel-checked-lean-proofs">1. Kernel-checked Lean proofs</h2>
 <p>A kernel-checked Lean proof is our highest verification grade. The entire
 claim — definitions, lemmas, theorem — is written in
@@ -65,31 +65,28 @@ square”) are certified by <strong>outward-rounded interval arithmetic</strong>
 explicit finite subdivision, with exact symbolic identities at the touching
 points. Re-running the certifying script reproduces the subdivision, box
 count, and verdict at any precision at or above the stated one.</p>
-<p>Internal review repeats the proof with a different interval library and a
-different subdivision, and runs <strong>mutation tests</strong>: inject a deliberately
-false constant and confirm the verifier rejects it.</p>
+<p>Internal review repeats the proof with a different interval library and
+subdivision. <strong>Mutation tests</strong> inject a deliberately false constant and
+confirm that the verifier rejects it.</p>
 <p><em>What it does not establish:</em> kernel-grade certainty. These results are
-graded as computer-assisted analytic theorems. A verifier that accepts a
-mutant is treated as a blocking defect and logged on the result page until
-fixed.</p>
+graded as computer-assisted analytic theorems. If a verifier accepts a
+mutated false claim, the defect blocks release and is logged on the result
+page until fixed.</p>
 <h2 id="4-dual-independently-implemented-exact-computations">4. Dual independently implemented exact computations</h2>
 <p>Other finite claims — counts, record witnesses, tables — are checked by two
 independent implementations, in different languages where practical. Both
 use exact arithmetic (integers and rationals, never floats), agree over the
 full claimed range, and pass mutation tests.</p>
 <h2 id="5-internally-reviewed-written-proofs">5. Internally reviewed written proofs</h2>
-<p>Some results rely on written proofs that passed adversarial internal review
-under a default-reject standard, with every mechanizable lemma
-machine-verified beyond the stated range. These receive a separate
-prose-proof grade — never the kernel grade. If formalization is underway,
-the result page identifies what is complete and what remains assumed.</p>
+<p>Some results rely on written proofs subjected to independent internal
+review. Where applicable, mechanizable lemmas are checked beyond the claimed
+parameter range. These receive a separate prose-proof grade — never the
+kernel grade — and any incomplete formalization is identified explicitly.</p>
 <hr>
 <p>The grades reflect their trusted base. A Lean-kernel result can be checked
 on your machine against a small, well-studied core; a reviewed prose result
-depends on its review process, and the page says so. If you check any of our
-artifacts and something fails to reproduce, please
-<a href="/about/#contact">contact John Erlbacher</a> — we want to know
-first.</p> </article>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Demonstrandum is an autonomous mathematical research system directed by John Erlbacher. Every result ships with independently checkable artifacts and reproduction instructions.</p> <p><a href="/about/#methodology">Methodology</a> · <a href="https://github.com/demonstrandum-research/artifacts">Artifacts</a> · <a href="/about/#contact">Contact</a></p> <p>No analytics, no cookies; your theme preference stays in your browser.</p> </div> </footer> <script>
+depends on its review process, and the page says so. If an artifact fails to
+reproduce, please <a href="/about/#contact">contact John Erlbacher</a>.</p> </article>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Demonstrandum is an autonomous mathematical research system directed by John Erlbacher. Every result ships with independently checkable artifacts and reproduction instructions.</p> <p><a href="/about/#methodology">Methodology</a> · <a href="https://github.com/demonstrandum-research/artifacts">Artifacts</a> · <a href="/about/#contact">Contact</a></p> <p>No analytics, no cookies; your theme preference stays in your browser.</p> </div> </footer> <script>
       (function () {
         var btn = document.getElementById('theme-toggle');
         if (!btn) return;
