@@ -6,7 +6,7 @@
           if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
         } catch (e) {}
       })();
-    </script><link rel="stylesheet" href="/_astro/about.yEU0qwu4.css"></head> <body> <header class="masthead"> <div class="container"> <a class="brand" href="/"> <span class="wordmark">Demonstrandum</span> <span class="byline">Autonomous mathematical research · <strong>John Erlbacher</strong></span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/">Results</a> <a href="/notes/" aria-current="page">Lab&nbsp;Notes</a> <a href="/about/">About</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button> </nav> </div> </header> <main> <div class="container">  <article> <h1>How to verify a result</h1> <p class="meta-line"> 
+    </script><link rel="stylesheet" href="/_astro/about.yEU0qwu4.css"></head> <body> <header class="masthead"> <div class="container"> <a class="brand" href="/"> <span class="wordmark">Demonstrandum</span> <span class="byline">Autonomous mathematical research · <strong>John Erlbacher</strong></span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/">Results</a> <a href="/notes/" aria-current="page">Lab&nbsp;Notes</a> <a href="/about/">About</a> <a href="mailto:erlbacher.research@gmail.com">Contact</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button> </nav> </div> </header> <main> <div class="container">  <article> <h1>How to verify a result</h1> <p class="meta-line"> 
 John Erlbacher · 10 July 2026 </p> <p class="article-deck">Demonstrandum&#39;s proofs, certificates, and exact computations — and the trust each one requires.</p> <p>Every Demonstrandum result names its verification artifact. This guide
 gives the check command, guarantee, and limitations for each class, roughly
 ordered by the size of its trusted base. Use the heading that matches the
@@ -42,7 +42,7 @@ of how the proof was produced.</p>
 <p><em>What it does not establish:</em> that the formal statement matches the informal
 claim. The reading kit addresses this by placing the source conjecture
 beside the Lean statement.</p>
-<h2 id="2-independently-checkable-sat-certificates-dratlrat">2. Independently checkable SAT certificates (DRAT/LRAT)</h2>
+<h2 id="2-sat-certificates-dratlrat">2. SAT certificates (DRAT/LRAT)</h2>
 <p>When a result rests on an exhaustive computation — “no configuration of this
 kind exists below this bound” — a solver verdict alone is not the artifact.
 Modern SAT solvers emit <strong>proof logs</strong> (DRAT/LRAT): step-by-step derivations
@@ -86,7 +86,7 @@ kernel grade — and any incomplete formalization is identified explicitly.</p>
 <p>The grades reflect their trusted base. A Lean-kernel result can be checked
 on your machine against a small, well-studied core; a reviewed prose result
 depends on its review process, and the page says so. If an artifact fails to
-reproduce, please <a href="/about/#contact">contact John Erlbacher</a>.</p> </article>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Demonstrandum is an autonomous mathematical research system directed by John Erlbacher. Every result ships with independently checkable artifacts and reproduction instructions.</p> <p><a href="/about/#methodology">Methodology</a> · <a href="https://github.com/demonstrandum-research/artifacts">Artifacts</a> · <a href="/about/#contact">Contact</a></p> <p>No analytics, no cookies; your theme preference stays in your browser.</p> </div> </footer> <script>
+reproduce, please <a href="/about/#contact">contact John Erlbacher</a>.</p> </article>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Demonstrandum is an autonomous mathematical research system directed by John Erlbacher. Every result ships with its proofs, certificates, and reproduction instructions.</p> <p>Contact: <a href="mailto:erlbacher.research@gmail.com">erlbacher.research@gmail.com</a></p> <p><a href="/about/#methodology">Methodology</a> · <a href="https://github.com/demonstrandum-research/artifacts">Artifacts</a> · <a href="/about/#contact">About the author</a></p> <p>No analytics, no cookies; your theme preference stays in your browser.</p> </div> </footer> <script>
       (function () {
         var btn = document.getElementById('theme-toggle');
         if (!btn) return;
