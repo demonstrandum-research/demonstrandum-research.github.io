@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>How to verify a result: a field guide to Demonstrandum&#39;s certificates · Demonstrandum</title><meta name="description" content="Kernel proofs, DRAT/LRAT certificates, interval certificates, dual computations — what each verification grade establishes, and the commands to run the check yourself."><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>How to verify a result · Demonstrandum</title><meta name="description" content="A field guide to Demonstrandum's proofs, certificates, and exact computations: what each verification grade establishes, and how to run the check yourself."><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>
       // Theme bootstrap: runs before paint; localStorage only; no network.
       (function () {
         try {
@@ -6,41 +6,42 @@
           if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
         } catch (e) {}
       })();
-    </script><link rel="stylesheet" href="/_astro/about.BkWTQlUy.css"></head> <body> <header class="masthead"> <div class="container"> <a class="brand" href="/"> <span class="wordmark">Demonstrandum</span> <span class="byline">The research system of <strong>John Erlbacher</strong></span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/">Results</a> <a href="/notes/" aria-current="page">Lab&nbsp;Notes</a> <a href="/about/">About</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Theme</button> </nav> </div> </header> <main> <div class="container">  <article> <h1>How to verify a result: a field guide to Demonstrandum&#39;s certificates</h1> <p class="meta-line">  2026-07-10 </p> <p>Every Demonstrandum result names the artifact that verifies it. This note
-explains those artifact classes, strongest first: what each one establishes,
-what it does not, and the commands used to check it. If a result page sent
-you here, the class it named is below.</p>
+    </script><link rel="stylesheet" href="/_astro/about.I9aPzWVC.css"></head> <body> <header class="masthead"> <div class="container"> <a class="brand" href="/"> <span class="wordmark">Demonstrandum</span> <span class="byline">Autonomous mathematical research · <strong>John Erlbacher</strong></span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/">Results</a> <a href="/notes/" aria-current="page">Lab&nbsp;Notes</a> <a href="/about/">About</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button> </nav> </div> </header> <main> <div class="container">  <article> <h1>How to verify a result</h1> <p class="meta-line"> 
+John Erlbacher · 10 July 2026 </p> <p class="article-deck">A field guide to Demonstrandum&#39;s proofs, certificates, and exact computations: what each verification grade establishes, and how to run the check yourself.</p> <p>Every Demonstrandum result names its verification artifact. This guide
+explains what each artifact class establishes, its limits, and how to check
+it — strongest class first. Use the heading that matches the grade on the
+result page.</p>
 <h2 id="1-kernel-checked-lean-proofs">1. Kernel-checked Lean proofs</h2>
-<p>Our highest verification grade. The entire claim — definitions, lemmas,
-theorem — is written in <a href="https://lean-lang.org/">Lean 4</a> and checked by
-Lean’s kernel, a small trusted core that verifies every inference down to
-the axioms of the logic. When we say a theorem is <em>kernel-checked</em>, we mean:</p>
+<p>A kernel-checked Lean proof is our highest verification grade. The entire
+claim — definitions, lemmas, theorem — is written in
+<a href="https://lean-lang.org/">Lean 4</a> and checked by Lean’s kernel, a small
+trusted core that verifies every inference down to the axioms of the logic.
+When we say a theorem is <em>kernel-checked</em>, we mean:</p>
 <ul>
 <li>the build is <strong>sorry-free</strong> — no step is assumed;</li>
-<li>the <strong>axiom audit</strong> reports exactly <code>propext</code>, <code>Classical.choice</code>,
-<code>Quot.sound</code> — the three standard Lean/mathlib axioms used by this
-development, and nothing else (in particular no <code>sorryAx</code>, the marker of
-an assumed step, and no <code>native_decide</code>, which would extend trust to the
-compiler);</li>
+<li>the <strong>axiom audit</strong> reports exactly <code>propext</code>, <code>Classical.choice</code>, and
+<code>Quot.sound</code>, the standard Lean/mathlib axioms used by this development.
+It reports neither <code>sorryAx</code> (the marker of an assumed step) nor
+<code>native_decide</code> (which would extend trust to the compiler);</li>
 <li>the <strong>definitions are exercised</strong> inside the kernel against brute-force
-enumeration for small parameters — small-parameter checks test that the
-definitions behave as intended, and the reading kit documents the bridge
-to the informal claim;</li>
-<li>a one-page <strong>reading kit</strong> ships with the proof: the theorem as stated in
-Lean, an English gloss of every definition it depends on down to mathlib
-bedrock, the verbatim bridge from the source claim to the formal statement,
-the audit output, and the rebuild command.</li>
+enumeration for small parameters. Small-parameter checks test that the
+definitions behave as intended; the reading kit documents the bridge to
+the informal claim;</li>
+<li>a one-page <strong>reading kit</strong> accompanies the proof. It includes the Lean
+theorem, an English glossary of its definitions, the bridge from the
+source claim to the formal statement, the axiom audit, and the rebuild
+command.</li>
 </ul>
-<p>To verify: install the pinned Lean toolchain (one command with
-<a href="https://github.com/leanprover/elan">elan</a>), then</p>
+<p>Install the pinned Lean toolchain with
+<a href="https://github.com/leanprover/elan">elan</a>, then run:</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>lake build</span></span>
 <span class="line"><span>lake env lean scripts/AxiomCheck.lean</span></span></code></pre>
 <p>The second command prints the axioms actually used by the main theorem.
 This confirms the formal theorem against the reported axioms, independently
 of how the proof was produced.</p>
 <p><em>What it does not establish:</em> that the formal statement matches the informal
-claim. That bridge is exactly what the reading kit is for — it is one page,
-and it quotes the source conjecture verbatim next to the Lean statement.</p>
+claim. The reading kit addresses this by placing the source conjecture
+beside the Lean statement.</p>
 <h2 id="2-independently-checkable-sat-certificates-dratlrat">2. Independently checkable SAT certificates (DRAT/LRAT)</h2>
 <p>When a result rests on an exhaustive computation — “no configuration of this
 kind exists below this bound” — a solver verdict alone is not the artifact.
@@ -48,14 +49,13 @@ Modern SAT solvers emit <strong>proof logs</strong> (DRAT/LRAT): step-by-step de
 of unsatisfiability that an independent program can check. We archive these
 and check them with
 <a href="https://github.com/tanyongkiam/cake_lpr"><code>cake_lpr</code></a>, a checker that is
-itself formally verified (in CakeML/HOL4, down to machine code). To verify a
-cell yourself:</p>
+itself formally verified (in CakeML/HOL4, down to machine code). To check a
+cell:</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>cake_lpr &#x3C;cell>.cnf &#x3C;cell>.lrat</span></span>
 <span class="line"><span># expect: s VERIFIED UNSAT</span></span></code></pre>
-<p>The satisfiable direction (an explicit example exists) is even easier: the
-certificate is the example, and checking it is a few lines of code you can
-write yourself. Our releases include both halves for every nontrivial cell,
-each solved by two independent SAT engines before archival.</p>
+<p>For a satisfiable instance, the certificate is an explicit example checked
+by a short independent program. Before archival, two independent SAT engines
+solve both halves of every nontrivial cell.</p>
 <p><em>What it does not establish:</em> that the CNF encoding means what we say. For
 that, the release documents the encoding, and small cells are cross-checked
 against direct exhaustive enumeration by independent code.</p>
@@ -63,47 +63,50 @@ against direct exhaustive enumeration by independent code.</p>
 <p>Analytic inequalities (“this two-variable function is nonnegative on the
 square”) are certified by <strong>outward-rounded interval arithmetic</strong> over an
 explicit finite subdivision, with exact symbolic identities at the touching
-points. The certificate is deterministic: the same subdivision, the same box
-count, the same verdict, at any precision at or above the stated one.
-Verification means re-running the certifying script — and, if you want
-independence, re-proving the inequality with a <em>different</em> interval library
-and a <em>different</em> subdivision, which is what our internal review does before
-any such result is banked. We also run <strong>mutation tests</strong>: inject a
-deliberately false constant and confirm the certificate fails. A verifier
-that cannot reject a falsehood proves nothing by accepting.</p>
-<p><em>What it does not establish:</em> kernel-grade certainty. We grade these as
-computer-assisted analytic theorems, we say so on the result page, and where
-a verifier is found to accept a mutant we treat that as a blocking defect —
-logged on the result page until fixed.</p>
+points. Re-running the certifying script reproduces the subdivision, box
+count, and verdict at any precision at or above the stated one.</p>
+<p>Internal review repeats the proof with a different interval library and a
+different subdivision, and runs <strong>mutation tests</strong>: inject a deliberately
+false constant and confirm the verifier rejects it.</p>
+<p><em>What it does not establish:</em> kernel-grade certainty. These results are
+graded as computer-assisted analytic theorems. A verifier that accepts a
+mutant is treated as a blocking defect and logged on the result page until
+fixed.</p>
 <h2 id="4-dual-independently-implemented-exact-computations">4. Dual independently implemented exact computations</h2>
-<p>For finite claims that are neither SAT-shaped nor analytic (a count, a
-record-witnessing object, a table), the standard is two implementations,
-written independently, in different languages where practical, using exact
-arithmetic (integers and rationals — never floats), agreeing on the full
-claimed range, with mutation tests confirming each would catch an error.</p>
-<h2 id="5-refereed-written-proofs">5. Refereed written proofs</h2>
-<p>Some results are supported by a written proof that has passed adversarial
-internal review under a default-reject standard, with every mechanizable
-lemma machine-verified beyond the stated range. We grade these separately
-(<em>refereed prose</em>), we never let them borrow the kernel grade, and where a
-formalization is in progress the result page says exactly what is closed and
-what still carries a <code>sorry</code>.</p>
+<p>Other finite claims — counts, record witnesses, tables — are checked by two
+independent implementations, in different languages where practical. Both
+use exact arithmetic (integers and rationals, never floats), agree over the
+full claimed range, and pass mutation tests.</p>
+<h2 id="5-internally-reviewed-written-proofs">5. Internally reviewed written proofs</h2>
+<p>Some results rely on written proofs that passed adversarial internal review
+under a default-reject standard, with every mechanizable lemma
+machine-verified beyond the stated range. These receive a separate
+prose-proof grade — never the kernel grade. If formalization is underway,
+the result page identifies what is complete and what remains assumed.</p>
 <hr>
-<p>The grades are ordered, and the order is the point: <em>Lean kernel</em> means the
-check runs on your machine against a small, well-studied trusted base;
-<em>refereed prose</em> means a review process stands behind the claim, and the
-page says so. If you check any of our artifacts and something fails to
-reproduce, <a href="/about/#contact">we want to know first</a>.</p> </article>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Demonstrandum is an autonomous mathematical research system directed by John Erlbacher. Every published result includes independently checkable verification artifacts and clear reproduction instructions.</p> <p><a href="/about/#methodology">Methodology</a> · <a href="https://github.com/demonstrandum-research/artifacts">Artifacts</a> · <a href="/about/#contact">Contact</a></p> <p>No analytics, no cookies; your theme preference stays in your browser.</p> </div> </footer> <script>
+<p>The grades reflect their trusted base. A Lean-kernel result can be checked
+on your machine against a small, well-studied core; a reviewed prose result
+depends on its review process, and the page says so. If you check any of our
+artifacts and something fails to reproduce, please
+<a href="/about/#contact">contact John Erlbacher</a> — we want to know
+first.</p> </article>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Demonstrandum is an autonomous mathematical research system directed by John Erlbacher. Every result ships with independently checkable artifacts and reproduction instructions.</p> <p><a href="/about/#methodology">Methodology</a> · <a href="https://github.com/demonstrandum-research/artifacts">Artifacts</a> · <a href="/about/#contact">Contact</a></p> <p>No analytics, no cookies; your theme preference stays in your browser.</p> </div> </footer> <script>
       (function () {
         var btn = document.getElementById('theme-toggle');
         if (!btn) return;
-        btn.addEventListener('click', function () {
-          var root = document.documentElement;
-          var current = root.dataset.theme ||
+        function current() {
+          return document.documentElement.dataset.theme ||
             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-          var next = current === 'dark' ? 'light' : 'dark';
-          root.dataset.theme = next;
+        }
+        function label() {
+          // button shows the theme you would switch TO
+          btn.textContent = current() === 'dark' ? 'Light' : 'Dark';
+        }
+        label();
+        btn.addEventListener('click', function () {
+          var next = current() === 'dark' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = next;
           try { localStorage.setItem('theme', next); } catch (e) {}
+          label();
         });
       })();
     </script> </body> </html>

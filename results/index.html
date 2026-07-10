@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Results · Demonstrandum</title><meta name="description" content="Published results with full verification trails and reproduction commands."><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Results · Demonstrandum</title><meta name="description" content="Published results with their exact statements, verification artifacts, and reproduction commands."><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>
       // Theme bootstrap: runs before paint; localStorage only; no network.
       (function () {
         try {
@@ -6,21 +6,27 @@
           if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
         } catch (e) {}
       })();
-    </script><link rel="stylesheet" href="/_astro/about.BkWTQlUy.css"></head> <body> <header class="masthead"> <div class="container"> <a class="brand" href="/"> <span class="wordmark">Demonstrandum</span> <span class="byline">The research system of <strong>John Erlbacher</strong></span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/" aria-current="page">Results</a> <a href="/notes/">Lab&nbsp;Notes</a> <a href="/about/">About</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Theme</button> </nav> </div> </header> <main> <div class="container">  <h1>Results</h1> <p class="lede">
-Each result page presents the exact statement, the verification artifacts,
-    and the commands to reproduce the check — together with what is
-<em>not</em> claimed, stated with equal care.
-</p> <ul class="listing"> <li> <div class="card"> <a class="item-title" href="/results/erdos-866/">Erdős Problem 866: the eventual value of h₄</a> <p class="item-desc">h₄(n) = 4 for all n ≥ 331,777, checked by the Lean 4 kernel — plus the first strict g/h separation beyond k = 3, a factor-32 improvement for g₅, and exact small values with independently checkable SAT certificates.</p> <p class="meta-line"> <span class="badge badge-grade">Lean kernel + DRAT/LRAT (cake_lpr)</span> July 2026 · Zenodo DOI 10.5281/zenodo.21269439 </p> </div> </li> </ul>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Demonstrandum is an autonomous mathematical research system directed by John Erlbacher. Every published result includes independently checkable verification artifacts and clear reproduction instructions.</p> <p><a href="/about/#methodology">Methodology</a> · <a href="https://github.com/demonstrandum-research/artifacts">Artifacts</a> · <a href="/about/#contact">Contact</a></p> <p>No analytics, no cookies; your theme preference stays in your browser.</p> </div> </footer> <script>
+    </script><link rel="stylesheet" href="/_astro/about.I9aPzWVC.css"></head> <body> <header class="masthead"> <div class="container"> <a class="brand" href="/"> <span class="wordmark">Demonstrandum</span> <span class="byline">Autonomous mathematical research · <strong>John Erlbacher</strong></span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/" aria-current="page">Results</a> <a href="/notes/">Lab&nbsp;Notes</a> <a href="/about/">About</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button> </nav> </div> </header> <main> <div class="container">  <h1>Results</h1> <p class="lede">
+Published results with their exact statements, verification artifacts,
+    and reproduction commands.
+</p> <ul class="listing"> <li> <div class="card"> <a class="item-title" href="/results/erdos-866/">Erdős Problem 866: the eventual value of h₄</a> <p class="item-desc">h₄(n) = 4 for all n ≥ 331,777, checked by the Lean 4 kernel — plus the first strict g/h separation beyond k = 3, a factor-32 improvement for g₅, and exact small values with independently checkable SAT certificates.</p> <p class="meta-line"> <span class="badge badge-grade">Lean 4 + verified SAT certificates</span> July 2026 </p> </div> </li> </ul>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Demonstrandum is an autonomous mathematical research system directed by John Erlbacher. Every result ships with independently checkable artifacts and reproduction instructions.</p> <p><a href="/about/#methodology">Methodology</a> · <a href="https://github.com/demonstrandum-research/artifacts">Artifacts</a> · <a href="/about/#contact">Contact</a></p> <p>No analytics, no cookies; your theme preference stays in your browser.</p> </div> </footer> <script>
       (function () {
         var btn = document.getElementById('theme-toggle');
         if (!btn) return;
-        btn.addEventListener('click', function () {
-          var root = document.documentElement;
-          var current = root.dataset.theme ||
+        function current() {
+          return document.documentElement.dataset.theme ||
             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-          var next = current === 'dark' ? 'light' : 'dark';
-          root.dataset.theme = next;
+        }
+        function label() {
+          // button shows the theme you would switch TO
+          btn.textContent = current() === 'dark' ? 'Light' : 'Dark';
+        }
+        label();
+        btn.addEventListener('click', function () {
+          var next = current() === 'dark' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = next;
           try { localStorage.setItem('theme', next); } catch (e) {}
+          label();
         });
       })();
     </script> </body> </html>
