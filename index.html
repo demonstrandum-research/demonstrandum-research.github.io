@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Machine-verified mathematics · Demonstrandum</title><meta name="description" content="Demonstrandum — machine-verified mathematics."><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>New mathematics, independently checkable · Demonstrandum</title><meta name="description" content="Demonstrandum is the autonomous mathematical research system of John Erlbacher. Every published result includes independently checkable verification artifacts."><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>
       // Theme bootstrap: runs before paint; localStorage only; no network.
       (function () {
         try {
@@ -6,22 +6,26 @@
           if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
         } catch (e) {}
       })();
-    </script><link rel="stylesheet" href="/_astro/about.DJDRClQS.css"></head> <body> <header class="site-header"> <div class="container"> <a class="brand" href="/">Demonstrandum
-<span class="tagline">quod erat — machine-verified mathematics</span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/">Results</a> <a href="/notes/">Lab&nbsp;Notes</a> <a href="/about/">About</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Aa</button> </nav> </div> </header> <main> <div class="container">  <h1>Mathematics you can check without trusting us.</h1> <p class="lede">
-Demonstrandum is an autonomous mathematical research system directed by its
-    author. Its defining discipline is that no claim rests on any model's
-    output: every result is reduced to independently checkable artifacts —
-    kernel-checked Lean proofs, exact certificates verifiable by standard
-    third-party tools, or dual independently implemented exact computations —
-    before it is stated.
+    </script><link rel="stylesheet" href="/_astro/about.BkWTQlUy.css"></head> <body> <header class="masthead"> <div class="container"> <a class="brand" href="/"> <span class="wordmark">Demonstrandum</span> <span class="byline">The research system of <strong>John Erlbacher</strong></span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/">Results</a> <a href="/notes/">Lab&nbsp;Notes</a> <a href="/about/">About</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Theme</button> </nav> </div> </header> <main> <div class="container">  <div class="hero"> <h1>Advancing mathematics with independently checkable results.</h1> <p class="lede">
+Demonstrandum is the autonomous mathematical research system of John
+      Erlbacher. It works on open problems and publishes new results with
+      independent verification built in.
 </p> <p>
-The system's outputs are fully transparent and reproducible from the
-    accompanying artifacts (<a href="/about/#methodology">methodology</a>), and
-    the author takes sole responsibility for all claims.
-</p> <h2>Results</h2> <p>One page per confirmed result: the exact statement, a
-  plain-language account, the artifacts, the reproduction commands, and the
-  verification trail.</p> <ul class="listing"> <li> <a class="item-title" href="/results/erdos-866/">Erdős Problem 866: the eventual value of h₄, and improved bounds for the Choi–Erdős–Szemerédi pairwise-sums problem</a> <p class="item-desc">h₄(n) = 4 for all n ≥ 331,777 (Lean-kernel), the first strict g/h separation beyond k = 3, a factor-32 improvement for g₅, and exact small values certified by dual SAT engines with formally verified proof checking.</p> <p class="meta-line">  <span class="badge badge-grade">Lean kernel + DRAT/LRAT (cake_lpr)</span> July 2026 · Zenodo DOI 10.5281/zenodo.21269439 </p> </li> </ul> <h2>Lab notes</h2> <p>Longer writeups: the mathematics behind the results, explained for
-  correspondents and curious readers.</p> <ul class="listing"> <li> <a class="item-title" href="/notes/how-to-check-us/">How to check us: a field guide to Demonstrandum&#39;s certificates</a> <p class="item-desc">Kernel proofs, DRAT/LRAT certificates, interval certificates, dual computations — what each artifact class does and does not guarantee, and how to verify one yourself in minutes.</p> <p class="meta-line">  2026-07-10 </p> </li> </ul>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Produced by Demonstrandum, the author's autonomous research system, which orchestrates frontier AI models within a proprietary verification-first architecture. No claim rests on a model's word: every result reduces to independently checkable artifacts. Author: John Erlbacher.</p> <p>No trackers, no analytics, no cookies (a single <code>localStorage</code> key remembers your theme). All math prerendered; no client-side math JS.</p> <p><a href="/about/#contact">Contact</a> · <a href="/about/#methodology">Methodology</a></p> </div> </footer> <script>
+Every release includes the exact statement, the artifacts that verify
+      it, and the commands to reproduce the check.
+</p> <div class="hero-links"> <a class="primary" href="/results/erdos-866/">Read the latest result</a> <a class="secondary" href="/notes/how-to-verify-a-result/">How verification works</a> </div> </div> <p class="kicker">Latest result</p> <h2>Erdős Problem 866: the eventual value of h₄</h2> <p>
+Demonstrandum proves that <em>h</em><sub>4</sub>(<em>n</em>) = 4 for all
+<em>n</em> ≥ 331,777, determining the eventual value of the constant whose
+    existence Choi, Erdős and Szemerédi established in 1975. The theorem is
+    checked by the Lean 4 kernel; the paper, Lean development, and full
+    certificate archive are public.
+</p> <ul class="listing"> <li> <div class="card"> <a class="item-title" href="/results/erdos-866/">Erdős Problem 866: the eventual value of h₄</a> <p class="item-desc">h₄(n) = 4 for all n ≥ 331,777, checked by the Lean 4 kernel — plus the first strict g/h separation beyond k = 3, a factor-32 improvement for g₅, and exact small values with independently checkable SAT certificates.</p> <p class="meta-line"> <span class="badge badge-grade">Lean kernel + DRAT/LRAT (cake_lpr)</span> July 2026 · Zenodo DOI 10.5281/zenodo.21269439 </p> </div> </li> </ul> <p class="kicker">Verification</p> <h2>Verify a result yourself</h2> <p>
+Each result page gives the exact claim, names its verification artifact,
+    records the verification trail, and provides reproduction commands.
+    Depending on the result, the artifact is a kernel-checked Lean proof, an
+    exact certificate verifiable by a standard third-party tool, or dual
+    independently implemented exact computations.
+</p> <p class="kicker">From the lab</p> <h2>Lab notes</h2> <p>Notes on the mathematics, methods, and verification tools behind the releases.</p> <ul class="listing"> <li> <div class="card"> <a class="item-title" href="/notes/how-to-verify-a-result/">How to verify a result: a field guide to Demonstrandum&#39;s certificates</a> <p class="item-desc">Kernel proofs, DRAT/LRAT certificates, interval certificates, dual computations — what each verification grade establishes, and the commands to run the check yourself.</p> <p class="meta-line">2026-07-10</p> </div> </li> </ul>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Demonstrandum is an autonomous mathematical research system directed by John Erlbacher. Every published result includes independently checkable verification artifacts and clear reproduction instructions.</p> <p><a href="/about/#methodology">Methodology</a> · <a href="https://github.com/demonstrandum-research/artifacts">Artifacts</a> · <a href="/about/#contact">Contact</a></p> <p>No analytics, no cookies; your theme preference stays in your browser.</p> </div> </footer> <script>
       (function () {
         var btn = document.getElementById('theme-toggle');
         if (!btn) return;
