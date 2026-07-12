@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four Colors: the Mixed Degree-{3,4} Case &mdash; Demonstrandum Research</title>
+<meta name="description" content="Published cubic and 4-regular strong-majority bounds, re-proved and machine-checked in Lean; the new mixed degree-{3,4} improvement from five colors to four remains one descent lemma from complete.">
+<link rel="canonical" href="https://demonstrandum-research.org/p/strong-majority/four-colors/">
+<meta property="og:title" content="Four Colors: the Mixed Degree-{3,4} Case">
+<meta property="og:description" content="Published cubic and 4-regular bounds, re-proved and machine-checked; the new mixed degree-{3,4} improvement from five colors to four remains one descent lemma from complete.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://demonstrandum-research.org/p/strong-majority/four-colors/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mastrow">
+      <h1 class="brand"><a href="/"><span class="wordmark">Demonstrandum</span><span class="byline">Machine-assisted mathematics &middot; <strong>John Erlbacher</strong></span></a></h1>
+      <nav class="site-nav">
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumb"><a href="/">Projects</a> &middot; <a href="/p/strong-majority/">Strong Majority Edge-Coloring</a> &middot; Four Colors</p>
+    <h1 class="page">Four Colors: the Mixed Degree-{3,4} Case</h1>
+    <p class="muted small">12 July 2026 &middot; known sub-cases kernel-checked &middot; mixed case conditional &middot; not externally refereed</p>
+
+    <section>
+      <p class="article-lede"><em>A different rung of the same ladder: published cubic and 4-regular bounds are re-proved and machine-checked, while the new mixed degree-{3,4} improvement from five colors to four remains one descent lemma from completion.</em></p>
+    </section>
+
+    <section>
+      <h2>The mixed degree-{3,4} target</h2>
+      <p>The target <code>R4_three_four</code> is Maj&prime;(G) &le; 4 for every finite simple graph whose degrees all lie in {3,4}. Its genuinely new mathematical ground is exactly the mixed class &mdash; graphs carrying both a degree-3 and a degree-4 vertex. The best previously published general bound there is Maj&prime;(G) &le; 5, by Theorem 2 of <a href="https://arxiv.org/abs/2607.00212">Antoniuk&ndash;Prorok&ndash;Salia, arXiv:2607.00212</a>; to our knowledge, closing the descent core would give the first bound of 4 for that class, a 5 &rarr; 4 improvement.</p>
+      <p>The pure sub-cases were already published. Cubic graphs satisfy the four-color bound by <a href="https://arxiv.org/abs/2605.23828">KKPW Proposition 15</a> and independently by <a href="https://arxiv.org/abs/2607.00212">APS Theorem 4</a>; 4-regular graphs satisfy it by <a href="https://arxiv.org/abs/2605.23828">KKPW Proposition 21</a>. The mixed class lies outside those hypotheses: degree 4 is not divisible by 3, degree 3 is odd, and APS Theorem 4 excludes degree-4 vertices.</p>
+      <p>Strong majority edge-coloring is a 2026 pen-and-paper concept. To our knowledge, no prior Lean or mathlib formalization of Maj&prime; or Conjecture 14 exists. The cubic and 4-regular re-proofs are therefore the first machine-checked strong-majority edge-coloring results; this is a formalization first, not a claim that their mathematics was open.</p>
+      <p>The round-13 gate recorded 105 declarations in the supporting inventory. Its sorry-free declarations were axiom-audited over <code>Maj5Base</code> and mathlib <code>8f9d9cff</code>; no report exceeded <code>[propext, Classical.choice, Quot.sound]</code>.</p>
+<!-- CONDITIONAL:DESCENT-STATUS START &mdash; orchestrator flips at publish. Current on-disk truth = OPEN. -->
+<p>Kernel-complete today are re-proofs of the two published pure sub-cases just credited: cubic and 4-regular. The genuinely new mixed degree-{3,4} bound is complete modulo one open combinatorial lemma, <code>strict_descent_of_no_clean_transversal</code>; since round 13 this descent core is consumed only in the degree-3 regime. Accordingly, <code>R4_three_four</code> is not yet kernel-complete, and the full KKPW Conjecture 14 remains open.</p>
+<!-- CONDITIONAL:DESCENT-STATUS ALT (if the lemma has closed by publish, replace the paragraph above with this one) -->
+<!-- <p>The descent core has closed: <code>R4_three_four</code> is kernel-complete, so every finite simple graph whose degrees lie in {3,4} has Maj&prime;(G) &le; 4. For the genuinely new mixed class, the improvement from the previously published general bound of 5 to 4 therefore stands unconditionally. The cubic and 4-regular sub-cases remain re-proofs of published results, and this theorem does not settle KKPW Conjecture 14, which quantifies over all admissible graphs.</p> -->
+<!-- CONDITIONAL:DESCENT-STATUS END -->
+    </section>
+
+    <section>
+      <h2>The 4-regular re-proof</h2>
+      <p>The 4-regular mathematics is already Proposition 21 of <a href="https://arxiv.org/abs/2605.23828">KKPW</a>, not a new theorem here. The artifact's re-proof is unconditional and kernel-complete; its contribution is formalization and a different proof.</p>
+      <p>KKPW's one-paragraph proof uses an Euler-tour coloring; the artifact instead uses a capacitated-Hall avoidance argument. Every vertex of a 4-regular graph is <em>clean</em>, so every cross edge at that vertex has cap 3. The core <code>Avoid.avoidance_core</code>, implemented through <code>Finset.all_card_le_biUnion_card_iff_existsInjective'</code>, selects one vertex from each odd cycle without selecting every vertex of any odd cross-cycle.</p>
+    </section>
+
+    <section>
+      <h2>Falsification as method</h2>
+      <p>The route did not begin with the construction that survived. An automated-prover pilot found the edge potential <code>ePot</code>, a sum of squared local color counts, and returned a ten-declaration sorry-free scaffold around it. The candidate was gated in a fresh pinned build, then killed by the program's own falsification: degrees-{3,4} graphs have global <code>ePot</code> minimizers that violate strong majority.</p>
+      <p>The decisive family-F witness has seven vertices and thirteen edges. An independent exhaustive search through all 4<sup>13</sup> colorings found 312 global minimizers, 96 of them not strong-majority. Separate seven-vertex witnesses and an independent recomputation reached the same verdict. Global minimality already makes every recoloring non-improving, so enlarging the local stationarity radius cannot repair the potential.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Claim tested</th><th>Concrete falsifier</th></tr></thead>
+          <tbody>
+            <tr><td>Every global <code>ePot</code> minimizer is strong-majority</td><td>The seven-vertex family-F graph: 96 of 312 global minimizers fail, by exhaustive 4<sup>13</sup> enumeration.</td></tr>
+            <tr><td>A larger recoloring neighborhood rescues <code>ePot</code></td><td>The same non-strong-majority witness is a global minimum, hence has nonnegative change under every recoloring.</td></tr>
+            <tr><td>A Kempe swap always escapes a terminal plateau</td><td><code>F?qaw</code> and <code>F?rF_</code>: 0/24 and 0/48 terminal components admit a decreasing swap; escape is at Hamming distance 3.</td></tr>
+            <tr><td>Irreducible color-5 supports are forests</td><td><code>G?zfFo</code> and <code>GCZbsw</code> at 14 edges have cyclic C<sub>4</sub>/K<sub>2,2</sub> supports.</td></tr>
+            <tr><td>One-move local minima are strong-majority</td><td><code>EFzo</code> on six vertices has 5,040 violating states among 11,184 one-move local minima.</td></tr>
+            <tr><td>Two-move local minima are strong-majority</td><td><code>E]zo</code> on six vertices and eleven edges has a non-strong-majority state for which all 1,020 recolorings of at most two edges are non-improving.</td></tr>
+            <tr><td>P2&Prime; characterizes zero-odd splits</td><td>Two port-joined copies of K&#8325;&minus;e give a ten-vertex 4-regular graph with 72 splits and no zero-odd split.</td></tr>
+            <tr><td>The potential survives degree-2 chain extensions</td><td>Two triangles joined through a degree-2 chain fail at lengths 1, 2, and 3.</td></tr>
+            <tr><td>The canonical one-swap move gives strict descent</td><td>On the q = 1 frustrated configuration, the four-edge star swap is only &omega;-non-increasing.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Random hardening was not enough. P2&Prime; passed 317 random graphs before the chained-K&#8325;&minus;e construction refuted it at order 10. Adversarial construction, not sample size alone, became a gate before further formalization spend.</p>
+      <p>The corrections also had higher order. A report that the q = 1 witness blocked the wider Scheme B was itself refuted by a two-edge strict exchange at that witness. An automated return asserted &ldquo;0 counterexamples, exhaustive&rdquo; twice in one response; independent recomputation found the counterexamples and is mandatory before such narrative claims can be used. Conversely, <code>ePot_recolor_diff</code>, once flagged false from a truncated quotation, matched the exact pinned formula in 4,440/4,440 tests, and a false negative about <code>defectSafe_iff_crossSafe</code> was settled in favor of the statement by the kernel. These are witness- or kernel-backed corrections, not narrative judgments.</p>
+      <p>Before publication, the same claims gate corrected an over-strong &ldquo;new theorem&rdquo; headline for the regular cases in the article's own marketing.</p>
+    </section>
+
+    <section>
+      <h2>The toolkit</h2>
+      <p>The campaign used a transplant gate. Statements went to provers as pins containing <code>sorry</code>; only sorry-free content was transplanted into the current architecture. Acceptance required a fresh rebuild, per-declaration <code>#print axioms</code>, and a token-diff of the statement. A return summary alone had no evidentiary standing.</p>
+      <p>Two unarmed attempts at the crux stopped at the same missing infrastructure. Before striking again, the program assembled the min-alternating realizability toolbox &mdash; more than twenty declarations, including <code>exists_isMinAlternating</code> &mdash; and the descent surgery engine. The realizability theorem permits any defect set choosing one vertex per odd cycle, with arbitrary signs, turning the remaining crux into pure placement combinatorics.</p>
+      <p>A complexity fence fixed the form of that last problem. Leven&ndash;Galil proved that deciding even-2-factorization of 4-regular graphs is NP-complete; a clean local characterization of &omega;-minimality is therefore unavailable here. The witness-seeded descent formulation is architecturally forced, not a stylistic preference.</p>
+      <p>Load-bearing steps were confirmed independently: <code>E1_split</code> and the minimal-split existence theorem each have two proofs; both directions of the class-I equivalence have independent derivations; <code>strongMajority_of_crossSafe_split</code> has three proofs; the clean-transversal bridge has two. The surrounding edge-coloring infrastructure was built while mathlib's edge-coloring API was still under development in <a href="https://github.com/leanprover-community/mathlib4/pull/33313">mathlib4#33313</a>.</p>
+    </section>
+
+    <section>
+      <h2>Open: the descent core</h2>
+      <p>The remaining lemma, <code>strict_descent_of_no_clean_transversal</code>, says the following in plain language. If a split of a connected, class-II, degrees-{3,4} graph admits no clean transversal, then another split exists with strictly smaller total odd-cycle count. A clean transversal chooses one cap-3-clean vertex from each odd cycle in one half without containing an odd cycle of the cross half in full.</p>
+      <p>To our knowledge, no known theorem implies either this descent lemma or the clean-transversal lemma. The STRIKE-B search covered Euler partitions; equitable and evenly-equitable edge colorings after de Werra, Hilton, and Erzurumluo&#287;lu&ndash;Rodger; oddness of cubic graphs after Huck&ndash;Kochol and Steffen; even 2-factorizations and even cycle decompositions after Markstr&#246;m; and compatible Euler tours after Kotzig, Fleischner, and Sabidussi.</p>
+      <p>The missing statement is best viewed as a parity-controlled compatible-rerouting theorem at the boundary of the cycle-double-cover circle. Closing it would finish <code>R4_three_four</code>.</p>
+    </section>
+
+    <section>
+      <h2>Artifacts</h2>
+      <div class="shelfrow">
+        <div class="item"><span class="kind">Archive</span><a href="LINK-PENDING-ARCHIVE">Zenodo archive</a><span class="note">Versioned paper, source, and audit materials; packaging is pending.</span></div>
+        <div class="item"><span class="kind">Reading kit</span><a href="LINK-PENDING-READING-KIT">Reading kit + rebuild instructions</a><span class="note">Statement-fidelity record, pinned environment, and clean rebuild procedure; packaging is pending.</span></div>
+        <div class="item"><span class="kind">Lean statement</span><a href="LINK-PENDING-LEAN">Pins2.lean</a><span class="note">The audited statement file and dependency chain; release packaging is pending.</span></div>
+        <div class="item"><span class="kind">Census</span><a href="LINK-PENDING-CENSUS">Census and falsification evidence</a><span class="note">Exact witnesses, search scripts, and evidence tables; packaging is pending.</span></div>
+        <div class="item"><span class="kind">Related</span><a href="/p/strong-majority/">Strong Majority Edge-Coloring</a><span class="note">The flagship five-color theorem, definitions, verification record, and limitations.</span></div>
+        <div class="item"><span class="kind">Development record</span><a href="/p/strong-majority/two-routes/">Two Routes to Five Colors</a><span class="note">The earlier companion chronicle of construction, failed routes, and audit checks.</span></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span>John Erlbacher</span>
+      <span class="muted">erlbacher.research@gmail.com</span>
+      <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
+      <a href="https://github.com/demonstrandum-research">GitHub</a>
+    </div>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Corrections are never silent &mdash; see <a href="/about/#corrections">the correction history</a>.</p>
+  </div>
+</footer>
+</body>
+</html>
