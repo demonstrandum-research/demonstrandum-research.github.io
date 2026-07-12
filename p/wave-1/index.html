@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wave 1: Thirteen Verified Results â€” Demonstrandum Research</title>
+<meta name="description" content="Eleven refutations of published conjectures, one proof of a published conjecture, and one numerical record â€” each backed by a runnable certificate or a kernel-checked Lean proof.">
+<link rel="canonical" href="https://demonstrandum-research.org/p/wave-1/">
+<meta property="og:title" content="Wave 1: Thirteen Verified Results">
+<meta property="og:description" content="Eleven refutations, one proof, one record â€” each mechanically checkable from public artifacts.">
+<meta property="og:type" content="article">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mastrow">
+      <h1 class="brand"><a href="/">Demonstrandum</a></h1>
+      <nav class="site">
+        <button id="theme-toggle" class="copybtn" type="button" aria-label="Toggle color theme">Theme</button>
+        <a href="/verify/">Verify</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumb"><a href="/">Projects</a> Â· Wave 1</p>
+    <h1 class="page">Wave 1: Thirteen Verified Results</h1>
+    <p class="statusline"><b>Certificates:</b> dual-checker <span class="ok">âœ“</span> &nbsp;Â·&nbsp; <b>Lean results:</b> kernel-checked <span class="ok">âœ“</span> &nbsp;Â·&nbsp; <b>Statements:</b> frozen verbatim from sources <span class="ok">âœ“</span> &nbsp;Â·&nbsp; <b>External review:</b> not yet</p>
+
+    <section>
+      <p>The operation's first release wave: eleven refutations of published conjectures, one proof of a published conjecture (Elizaldeâ€“Luo), and one numerical record â€” each frozen verbatim from its source before attack, and each backed by a runnable certificate accepted by independent checkers or a Lean&nbsp;4 proof accepted by the kernel. Every result carries a per-result "what this does <em>not</em> show" caveat in the artifact record.</p>
+    </section>
+
+    <section>
+      <h2>The results</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Result</th><th>Grade</th><th>Artifact</th></tr></thead>
+          <tbody>
+            <tr><td>Elizaldeâ€“Luo {1132, 3312} conjecture â€” proved in Lean 4</td><td>kernel</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/elizalde-luo">paper</a></td></tr>
+            <tr><td>Discrete Borsuk Conjecture 3 (arXiv:2508.20009) â€” disproved in Lean 4</td><td>kernel</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/borsuk">paper</a></td></tr>
+            <tr><td>C(13) â‰¥ 36 record ("no 5 on a sphere") â€” improves C(12) â‰¥ 33</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/no5sphere-record">paper</a></td></tr>
+            <tr><td>Sun Conjecture 4.6 (arXiv:2108.07723) â€” refuted at p = 29</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/sun-46">paper</a></td></tr>
+            <tr><td>Graffiti Conjectures 143 &amp; 154 (std-dev reading) â€” refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/graffiti-143-154">paper</a></td></tr>
+            <tr><td>IRIS Conjecture 6.1 ("NuevaMirada") â€” refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
+            <tr><td>TxGraffiti / Davila Conjecture 9 â€” refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
+            <tr><td>Pandey parity conjecture â€” refuted (both directions)</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
+            <tr><td>Solubilizer Conjectures A.1, A.13, A.16 (arXiv:2412.16177) â€” refuted</td><td>dual-checker / audit-panel</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
+            <tr><td>Kochâ€“Narayan Conjecture 1 â€” refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Artifacts</h2>
+      <div class="shelfrow">
+        <div class="item"><span class="kind">Archive</span><a href="https://doi.org/10.5281/zenodo.21264100">Zenodo DOI 10.5281/zenodo.21264100</a><span class="note">Citable frozen snapshot: papers, certificates, checkers, verification code.</span></div>
+        <div class="item"><span class="kind">Source</span><a href="https://github.com/demonstrandum-research/artifacts">github.com/demonstrandum-research/artifacts</a><span class="note">Complete repository with the one-command battery: <code>python verify_all.py</code>.</span></div>
+        <div class="item"><span class="kind">Record</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a><span class="note">Exact statements, frozen sources, and per-result caveats.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <p>These results have not been externally refereed. Refutations are finite and mechanical â€” the strongest kind of claim to check â€” but novelty statements rest on our own literature searches, whose scope is recorded per result. Statement-fidelity (that each frozen formal statement represents the cited conjecture) was reviewed internally and is documented in the artifact record.</p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span>John Erlbacher</span>
+      <span id="em" class="muted">erlbacher.research@gmail.com</span>
+      <button class="copybtn" onclick="navigator.clipboard.writeText(document.getElementById('em').textContent).then(()=>{this.textContent='copied';setTimeout(()=>this.textContent='copy email',1200)})">copy email</button>
+      <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
+      <a href="https://github.com/demonstrandum-research">GitHub</a>
+    </div>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0.</p>
+  </div>
+</footer>
+<script>(function(){var b=document.getElementById("theme-toggle");if(!b)return;function cur(){return document.documentElement.dataset.theme||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}function lab(){b.textContent=cur()==="dark"?"Light":"Dark";}lab();b.addEventListener("click",function(){var n=cur()==="dark"?"light":"dark";document.documentElement.dataset.theme=n;try{localStorage.setItem("theme",n);}catch(e){}lab();});})();</script>
+</body>
+</html>
+

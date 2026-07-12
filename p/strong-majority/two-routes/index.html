@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Routes to Five Colors â€” Demonstrandum Research</title>
+<meta name="description" content="How an eleven-day-old theorem got a formal verification, a different proof, and three clarifications: the research chronicle, with pre-registered predictions and their outcomes.">
+<link rel="canonical" href="https://demonstrandum-research.org/p/strong-majority/two-routes/">
+<meta property="og:title" content="Two Routes to Five Colors">
+<meta property="og:description" content="The research chronicle behind the Lean verification of the strong majority five-color theorem â€” pre-registered predictions, a kernel-refuted impossibility claim, and a three-prover race on five lemmas.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://demonstrandum-research.org/p/strong-majority/two-routes/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mastrow">
+      <h1 class="brand"><a href="/">Demonstrandum</a></h1>
+      <nav class="site">
+        <button id="theme-toggle" class="copybtn" type="button" aria-label="Toggle color theme">Theme</button>
+        <a href="/verify/">Verify</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumb"><a href="/">Projects</a> Â· <a href="/p/strong-majority/">Strong Majority Edge-Coloring</a> Â· Two Routes to Five Colors</p>
+    <h1 class="page">Two Routes to Five Colors</h1>
+    <p class="muted small">11 July 2026 Â· companion to the <a href="/p/strong-majority/">project page</a></p>
+
+    <section>
+      <h2>The theorem</h2>
+      <p><b>Every admissible graph admits a strong majority edge-coloring with five colors.</b></p>
+      <p>A strong majority edge-coloring assigns a color to every edge so that, for each edge, no single color covers more than half of the edges adjacent to it; a graph is admissible if it has no degree-1 vertex adjacent to a degree-2 vertex (the one locally impossible configuration). The theorem was first proved by Antoniuk, Prorok, and Salia (<a href="https://arxiv.org/abs/2607.00212">arXiv:2607.00212</a>, 30 June 2026). On 11 July 2026 it was verified by the Lean&nbsp;4 kernel â€” via a proof with a different architecture â€” as <code>SMaj.Synthesis.maj_le_five</code>, with axiom audit exactly <code>[propext, Classical.choice, Quot.sound]</code>. <b>Theorem â€” kernel-checked.</b></p>
+      <p>This page is about the two architectures, and then about how the second one was found, stress-tested, broken, repaired, raced, and checked. Every number below is auditable against the released artifact and working records.</p>
+      <div class="box">
+        <p><b>The short version, if you read nothing else:</b> the published proof runs on equitable colorings and ear surgery; the verified proof runs on chain contraction and Vizing's theorem. The verified proof was assembled in one working day on top of previously kernel-checked infrastructure, by three different AI proof systems racing on five frozen lemmas, under a standing audit that accepted nothing without an independent rebuild. Along the way the audit refuted one of our own written claims â€” the assertion that this entire route was impossible â€” with a six-vertex kernel-checked counterexample. The final theorem was verified twice, in two clean-room builds of 8,037 compilation jobs each.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Route A and Route B</h2>
+      <p><b>Route A (the paper).</b> Antoniukâ€“Prorokâ€“Salia prove an equitable-coloring theorem (after Hilton and de Werra): if no vertex degree is divisible by k, the graph has a k-edge-coloring in which every vertex sees any two colors almost equally often. Their five-color proof performs five graph reductions â€” removing loop-shaped ears, ears anchored at degree-five vertices, length-two ears, long ears, and finally attaching a leaf wherever the degree is a multiple of five â€” applies the equitable theorem with k = 5 to the trimmed graph, then undoes the five reductions in reverse, recoloring locally each time. Degree-five vertices, made temporarily degree-four by the ear removals, end up with a free fifth color that pays for the restorations.</p>
+      <p><b>Route B (the verified proof).</b> Decompose the graph into <em>chains</em> â€” maximal paths whose interior vertices have degree 2 â€” running between <em>junctions</em> (vertices of degree â‰¥ 3). At each junction of degree d, partition the d edge-ends into at most âŒˆd/4âŒ‰ groups of size at most 4, steering group sizes to at most 3 whenever the arithmetic allows (it fails to allow exactly at d = 4, 7, 8, 10, 11, â€¦). Contract each chain of length â‰¤ 2 to a single edge between its end-groups, producing an auxiliary multigraph M of maximum degree 4. Simplify M by two local rules (un-contract one short chain in each doubled pair between full groups; set aside the remaining parallel classes) until what is left, Mâ‚€, is a <em>simple</em> graph of maximum degree 4. Then the single deep input: <b>Vizing's theorem</b> â€” a simple graph of maximum degree 4 has a proper 5-edge-coloring. Reinsert the set-aside parallel edges greedily (a counting inequality guarantees room), color the two ports of each long chain independently, fill chain interiors by a list-avoidance lemma, and transport everything back to the original graph. A four-condition interface (a "glue coloring": group-rainbow, group-count, chain-end, and interior conditions) had already been proved â€” in this program's earlier six-color formalization â€” to imply the strong majority property. Route B's entire new mathematics is: build a five-color glue coloring.</p>
+      <p>The two routes share their hard core. An analysis during the work showed that any equitable-coloring statement strong enough at degree-4 vertices <em>contains</em> Vizing-at-Î”=4 (equitability at degree 4 with five colors forces the incident color counts 1,1,1,1,0 â€” local properness), so neither route dodges that difficulty; they package it differently. Route A buys it inside the Hiltonâ€“de Werra theorem; Route B pays for it directly and reuses previously verified plumbing for everything else.</p>
+    </section>
+
+    <section>
+      <h2>Finding Route B</h2>
+      <p>The starting position on the morning of 11 July: the program had a complete kernel-checked proof that six colors suffice, built around the glue-coloring interface; a same-morning formalization of a recoloring toolkit (rotation and color-swap lemmas after Kierstead's method â€” to our knowledge the first formalization of Kierstead-path machinery in any proof assistant â€” closed after a focused session in which the winning proof took about 90 minutes); and a census computation. The six-color proof's own palette came from Shannon's multigraph bound, which is exactly tight at 6 on "fat triangles" â€” triples of junctions pairwise joined by doubled edges â€” so the six-color architecture could not be pushed to five as it stood.</p>
+      <p>Two things happened in the first hours, one of them embarrassing in a useful way.</p>
+      <p><b>The refutation attempt came up empty.</b> Before spending effort proving the theorem, we tried to falsify it. An exhaustive computation over all 268,478 admissible graphs on at most 9 vertices found a <em>four</em>-coloring for every single one (plus exhaustive checks of all 89,771 four-regular graphs on 10, 12, and 14 vertices). No admissible graph requiring five colors â€” let alone six â€” has ever been observed. <b>Exact computation.</b> This killed the counterexample scenario and, incidentally, is living evidence for the still-open four-color conjecture.</p>
+      <p><b>Our own impossibility claim was refuted at the kernel.</b> The six-color artifact's documentation asserted that the glue route could not produce a five-color witness â€” the fat-triangle obstruction, stated as fact. During route analysis, one review track challenged this and produced a six-vertex candidate: a fat triangle whose doubled edges are chains. The corresponding five-color glue coloring was checked by the Lean kernel (<code>decide</code>, standard axioms) against the frozen definitions â€” on the very configuration the documentation declared impossible. The impossibility was a true fact about <em>one construction</em> (Shannon's), written up as a fact about <em>the route</em>. The claim had never been a theorem; it was a comment. Protocol changed the same hour: impossibility claims now require a formal declaration name plus axiom audit, or an explicit "(prose, unverified)" tag. The reopened glue route became the main line, and everything that follows happened on it.</p>
+      <p><b>Formalization-grade reading surfaced three clarifications to the paper's argument.</b> In parallel, one track transcribed the Antoniukâ€“Prorokâ€“Salia proof step by step, to cost out a faithful formalization of Route A. The theorem survives unaffected; the transcription found three points in the written argument that need repair or tidying. First (minor): the displayed inequality in the proof of the paper's Theorem 4 â€” the four-color result for graphs with no degree-2 or degree-4 vertices â€” fails at degree-1 vertices; the conclusion stands, because a one-line count using the bound only at the other endpoint restores it (the authors handle exactly this degree-1 subtlety in their five-color proof, but the corresponding step is omitted in Theorem 4's). Second (editorial): the proof of the paper's Claim 10 contains two consecutive drafts of the same "Case k = 1" paragraph. Third, the substantive one: in undoing the first reduction (R1), the written proof specifies how to restore a degree-5 vertex that lost <em>one</em> loop ear, but a degree-5 vertex carrying <em>two</em> loop ears â€” two triangles sharing the vertex, plus one pendant edge; a legitimate admissible configuration â€” finishes the reduction phase holding three auxiliary leaves, a state neither restoration paragraph covers. A repair using only the paper's own tools (its Claim 8 balance property and the distinctness argument of its Remark 9, feeding its Claim 10 extension) closes the case. Before release, all three claims were handed to a second, hostile referee instructed to kill them, working directly from the hash-pinned arXiv v1 LaTeX source. All three were confirmed â€” and the hostile pass caught an error of <em>ours</em>: the internal notes had mis-numbered the paper's results (placing the duplicated paragraph in "Claim 7" rather than Claim 10, among other slips), corrected before anything shipped or was sent to the authors. <b>Confirmed by adversarial internal review against the arXiv v1 source; prose mathematics, not kernel-checked.</b> The authors were notified privately, with the repair, before this page went live.</p>
+      <p><b>The route survived an adversarial battery before any proving began.</b> A dedicated adversarial track built 14 explicit nasty instances â€” fat-triangle variants, degree-4-rich graphs, greedy-jamming configurations â€” with an exact checker that verifies a proposed coloring in under a second. The first version of Route B failed 3 of its 12 applicable checks, including one certified case gap (a chain-transport case that random testing triggered on roughly a third of graphs). The repair adopted a hybrid of two competing route drafts: monochromatic transport for length-2 chains, independently colored ports for longer ones. The repaired route passed all 15 checks of the extended battery, and its structural invariants were machine-verified on 1,854 random graphs with zero failures. Only then was formalization money spent.</p>
+    </section>
+
+    <section>
+      <h2>Five lemmas, three provers, one audit</h2>
+      <p>Route B was frozen as five Lean statements against the unchanged six-color artifact â€” the "ladder":</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th></th><th>Content</th><th>Assessed difficulty at freeze</th></tr></thead>
+          <tbody>
+            <tr><td><b>Î›1</b></td><td>Grouping arithmetic: d splits into âŒˆd/4âŒ‰ parts of size â‰¤ 4, size â‰¤ 3 when d âˆˆ {3, 5}</td><td>trivial</td></tr>
+            <tr><td><b>Î›2</b></td><td>Vizing's theorem at Î” â‰¤ 4, five colors, in the artifact's multigraph encoding</td><td>the deep input; no mathlib support</td></tr>
+            <tr><td><b>Î›3</b></td><td>Greedy reinsertion of parallel classes</td><td>moderate</td></tr>
+            <tr><td><b>Î›4</b></td><td>The construction: build the five-color glue coloring</td><td>the largest surface</td></tr>
+            <tr><td><b>Î›5</b></td><td>Final assembly: Î›4 plus the banked interface dispatch gives the theorem</td><td>one line</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Statement fidelity was absolute throughout: the target <code>maj_le_five</code> stayed byte-identical to its months-old pin, all definitions frozen, and every candidate proof was diffed token-for-token against the pins before acceptance.</p>
+      <p><b>Predictions were registered before results came back.</b> Before committing to the ladder, six smaller infrastructure pieces were sent to Harmonic's Aristotle (an automated theorem-proving system) with written acceptance probabilities, logged in advance:</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Task</th><th>Pre-registered P(proved)</th><th>Outcome</th></tr></thead>
+          <tbody>
+            <tr><td>counting arithmetic</td><td>0.95</td><td>proved, kernel-accepted (one lemma even choice-free)</td></tr>
+            <tr><td>leaf-augmentation lemmas</td><td>0.75</td><td>proved, kernel-accepted 4/4 (one lemma axiom-free)</td></tr>
+            <tr><td>path/ear lemmas</td><td>0.65</td><td>proved, kernel-accepted 3/3</td></tr>
+            <tr><td>recoloring bound</td><td>0.45</td><td>proved, kernel-accepted</td></tr>
+            <tr><td>equitable-coloring theorem, k = 5</td><td>0.15</td><td>not proved â€” reduced honestly to one crux</td></tr>
+            <tr><td>equitable-coloring theorem, general k</td><td>0.10</td><td>not proved â€” same crux, independently</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Predicted number of successes: 3.05. Actual: 4. The <em>ranking</em> was perfect â€” everything rated â‰¥ 0.45 succeeded, everything â‰¤ 0.15 failed â€” but the mid-range predictions were systematically pessimistic, and the recalibration was written down before the next wave. The two failures were the most informative returns of the six: both independently hit the <em>same</em> missing ingredient â€” the existence of Eulerian trails, which mathlib currently lacks (it is an explicit TODO in mathlib's source) â€” and both independently derived that a divisibility hypothesis the task header speculated was removable is in fact necessary (witness: Kâ‚… at k = 4; a triangle at k = 2). Two blind runs, same wall, same correction. That settled the architecture question: the equitable-coloring route would cost a from-scratch Euler theory; the Vizing route would not. <b>Pre-registered predictions vs. outcomes; all logged before returns.</b></p>
+      <p><b>The race.</b> The five ladder statements then went to three systems in parallel â€” Aristotle (eight submissions across framings), an OpenAI reasoning model, and an Anthropic reasoning model, the latter two iterating compile-and-fix in pinned environments â€” with a standing rule: the first kernel-accepted proof of each statement wins, and <em>nothing counts until a separate audit step independently rebuilds it from source and prints its axioms</em>. The final scoreboard:</p>
+      <ul>
+        <li><b>Î›1</b> â€” closed twice, independently, within the hour: Aristotle produced a 42-line proof by explicit closed-form witness (no induction); the OpenAI model produced a 38-line strong-induction proof. Same statement, two structurally different proof objects. (Pre-registered 0.97.)</li>
+        <li><b>Î›2</b> â€” the bottleneck, and everyone knew it: five independent proof attempts on other lemmas each named Vizing-at-Î”â‰¤4 as their single missing prerequisite. (Mathlib has no edge-coloring machinery at all; the one existing Lean formalization of Vizing's theorem â€” Bhoja, <a href="https://arxiv.org/abs/2512.13999">arXiv:2512.13999</a>, Dec 2025 â€” lives on a bespoke graph type incompatible with this artifact's encoding, so the theorem had to be proved in-file.) It fell to the Anthropic model: 864 lines, a fan-rotation induction powered by the recoloring kit that had been kernel-checked that same morning. The instructive detail: two parallel attempts given progressively less supporting context both reduced to the same final extension step and stopped exactly there. Three attempts, three context levels, strictly monotone progress in context â€” on a hard named subproblem, what you arm the prover with matters more than how often you retry it.</li>
+        <li><b>Î›3</b> â€” Aristotle proved the reinsertion content outright (its other half <em>was</em> Î›2, so Î›2's closure made it unconditional).</li>
+        <li><b>Î›4</b> â€” the centerpiece, closed by composition: the OpenAI model built the construction core (the auxiliary-graph combinatorics, the traversal and dispatch engine), while Aristotle submissions returned complementary proved components with near-zero overlap â€” an interior-fill pass, the chain-end transport layer, and, notably, a uniform grouping construction that <em>eliminated one of the two existential witnesses from the statement</em>: it proved that a suitable grouping can be manufactured from any coloring satisfying three row-level properties, so the target provably shrank mid-race from "construct a grouping and a coloring" to "construct a coloring." (The pre-registered chances that a single first-wave submission would close Î›4 outright: 0.10â€“0.15 each, â‰ˆ 0.35 that at least one would. None did â€” those probabilities were honest â€” but their proved partials, rated 0.60â€“0.75, all landed.)</li>
+        <li><b>Î›5</b> â€” one line, as predicted (0.95), the moment Î›4 existed.</li>
+      </ul>
+      <p><b>The endgame was three checks.</b> After the merge of everything above, the unproved content of the whole theorem had shrunk to three verification lemmas: that the fully assembled coloring satisfies the multiplicity cap, interior distinctness, and the chain-end condition. Pre-registered: â‰ˆ 0.70 that the next prover wave closes all three. In the event, the in-session tracks got there first, twice: the Anthropic model completed a verification block over the OpenAI model's construction, and the OpenAI model independently completed its <em>own</em> verification block. Two finished proofs of the same frozen statement, sharing the construction skeleton but with independently produced verification layers.</p>
+      <p><b>The double gate.</b> Each completion then went through the full acceptance ritual, separately: token-identity of the statement against every pin; a scan of the sources (zero <code>sorry</code>, zero hits on fourteen proof-subversion patterns, exactly one public declaration per file); a from-scratch rebuild in a fresh clone of the pinned environment â€” 8,037 compilation jobs, exit code 0, once per completion in two separate clean environments; and axiom prints across the whole dependency chain, every one exactly <code>[propext, Classical.choice, Quot.sound]</code>, zero <code>sorryAx</code>. Decision to attempt the theorem: about 15:45. Second independent kernel confirmation: about 19:25 the same day â€” three hours and forty minutes, standing on a base of previously verified infrastructure that took considerably longer.</p>
+    </section>
+
+    <section>
+      <h2>Negative results and incidents, for the record</h2>
+      <ul>
+        <li><b>The first-wave ladder predictions that failed, failed honestly.</b> Full closure in the first prover wave was pre-registered at â‰ˆ 0.25 and did not happen; no single Î›4 submission closed it (â‰ˆ 0.35 that one would). The race was won by merge and iteration, not by a lottery ticket.</li>
+        <li><b>One delivery arrived corrupted.</b> Mid-race, one agent-delivered Lean file contained a literal "â€¦440 tokens truncatedâ€¦" marker â€” a transport-layer corruption that would have been catastrophic if trusted. It was caught immediately by the standing discipline that nothing counts unless it rebuilds from disk in a fresh environment; the file was re-emitted and hash-verified, and hash verification of every file delivery was adopted on the spot.</li>
+        <li><b>A stale comment propagated a refuted claim.</b> One late prover run, given a file whose documentation still contained the kernel-refuted impossibility claim, reproduced that claim in its diagnosis; two others working from the same file did not. The lesson was mechanical, not moral: refuted claims get patched at the source file, because downstream readers â€” human or machine â€” inherit comments as facts.</li>
+        <li><b>A same-day comparison of proving systems, same task, identical input:</b> the morning's recoloring crux was closed by the OpenAI model in about 90 minutes and by Aristotle â€” independently, with a structurally different proof â€” in 7 hours 21 minutes of prover time. Both proofs kernel-check. Variance between systems on identical formal tasks is large and real.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What remains open</h2>
+      <p>The four-color conjecture of Kalinowski, Kamyczura, PilÅ›niak, and WoÅºniak â€” Majâ€²(G) â‰¤ 4 for every admissible graph (Conjecture 14 of <a href="https://arxiv.org/abs/2605.23828">arXiv:2605.23828</a>) â€” is open, and the bound 4 would be optimal. The census computed along the way is direct evidence <em>for</em> it: among all 268,478 admissible graphs on at most nine vertices, none needs five colors â€” none has ever been observed anywhere â€” and the smallest graph needing four is the paw, a triangle with one pendant edge. <b>Exact computation; the conjecture itself is open.</b> The verified five-color machinery was deliberately built with the palette size as a parameter wherever that cost nothing, so parts of it are reusable by whoever â€” human or machine â€” takes the next step down.</p>
+      <h3>Artifacts</h3>
+      <div class="shelfrow">
+        <div class="item"><span class="kind">Paper</span><a href="LINK-PENDING-PAPER">Verification + the alternative proof, with the full route</a></div>
+        <div class="item"><span class="kind">Artifact</span><a href="LINK-PENDING-DOI">Lean artifact, archived with DOI</a><span class="note">Sources, pinned toolchain <code>leanprover/lean4:v4.28.0</code>, axiom audits, build logs.</span></div>
+        <div class="item"><span class="kind">Reproduce</span><a href="LINK-PENDING-REPRODUCE">One-command rebuild instructions</a></div>
+        <div class="item"><span class="kind">Project</span><a href="/p/strong-majority/">Strong Majority Edge-Coloring â€” project page</a></div>
+      </div>
+      <p class="muted small">Produced by Demonstrandum, the author's autonomous research system, which orchestrates frontier AI models within a proprietary verification-first architecture. No claim rests on a model's word: every result reduces to independently checkable artifacts.</p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span>John Erlbacher</span>
+      <span id="em" class="muted">erlbacher.research@gmail.com</span>
+      <button class="copybtn" onclick="navigator.clipboard.writeText(document.getElementById('em').textContent).then(()=>{this.textContent='copied';setTimeout(()=>this.textContent='copy email',1200)})">copy email</button>
+      <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
+      <a href="https://github.com/demonstrandum-research">GitHub</a>
+    </div>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Corrections are never silent â€” see <a href="/verify/#corrections">the correction history</a>.</p>
+  </div>
+</footer>
+<script>(function(){var b=document.getElementById("theme-toggle");if(!b)return;function cur(){return document.documentElement.dataset.theme||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}function lab(){b.textContent=cur()==="dark"?"Light":"Dark";}lab();b.addEventListener("click",function(){var n=cur()==="dark"?"light":"dark";document.documentElement.dataset.theme=n;try{localStorage.setItem("theme",n);}catch(e){}lab();});})();</script>
+</body>
+</html>
+

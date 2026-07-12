@@ -1,44 +1,66 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Theorems, not claims · Demonstrandum</title><meta name="description" content="Theorems, not claims: Demonstrandum, the autonomous mathematical research system of John Erlbacher, publishes new mathematics proven correct — machine-verified proofs and certificates ship with each release."><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>
-      // Theme bootstrap: runs before paint; localStorage only; no network.
-      (function () {
-        try {
-          var t = localStorage.getItem('theme');
-          if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
-        } catch (e) {}
-      })();
-    </script><link rel="stylesheet" href="/_astro/about.yEU0qwu4.css"></head> <body> <header class="masthead"> <div class="container"> <a class="brand" href="/"> <span class="wordmark">Demonstrandum</span> <span class="byline">Autonomous mathematical research · <strong>John Erlbacher</strong></span> </a> <nav class="site-nav" aria-label="Site"> <a href="/results/">Results</a> <a href="/notes/">Lab&nbsp;Notes</a> <a href="/about/">About</a> <a href="mailto:erlbacher.research@gmail.com">Contact</a> <button id="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button> </nav> </div> </header> <main> <div class="container">  <div class="hero"> <h1>Theorems, not claims.</h1> <p class="lede">
-New mathematics, proven correct: Demonstrandum is an autonomous
-      mathematical research system directed by John Erlbacher. It works on
-      open problems, and the proofs, certificates, and reproduction commands
-      ship with each release.
-</p> <div class="hero-links"> <a class="primary" href="/results/erdos-866/">Read the latest result</a> <a class="secondary" href="/notes/how-to-verify-a-result/">How verification works</a> </div> </div> <p class="kicker">Latest result</p> <div class="card"> <a class="item-title" href="/results/erdos-866/">Erdős Problem 866: the eventual value of h₄</a> <p class="item-desc">
-Demonstrandum proves that h₄(n) = 4 for all n ≥ 331,777, determining
-        the eventual value of the constant shown to exist in 1975 by Choi,
-        Erdős, and Szemerédi. The Lean 4 kernel verifies the proof; the paper,
-        development, and certified-release archive are public.
-</p> <p class="meta-line"> <span class="badge badge-grade">Certified release: Lean 4 + verified SAT certificates</span> July 2026 </p> </div><h2>Verify a result yourself</h2> <p>
-Each result page pairs the claim with its verification artifact, audit
-    trail, and reproduction commands. The artifact may be a kernel-checked
-    Lean proof, a certificate for a standard third-party checker, or two
-    independently implemented exact computations.
-</p> <h2>Lab notes</h2> <p>Each note explains one mathematical idea, method, or verification tool.</p> <ul class="listing"> <li> <div class="card"> <a class="item-title" href="/notes/how-to-verify-a-result/">How to verify a result</a> <p class="item-desc">Demonstrandum&#39;s proofs, certificates, and exact computations — and the trust each one requires.</p> <p class="meta-line">10 July 2026</p> </div> </li> </ul>  </div> </main> <footer class="site-footer"> <div class="container"> <p>Demonstrandum is an autonomous mathematical research system directed by John Erlbacher. Every result ships with its proofs, certificates, and reproduction instructions.</p> <p>Contact: <a href="mailto:erlbacher.research@gmail.com">erlbacher.research@gmail.com</a></p> <p><a href="/about/#methodology">Methodology</a> · <a href="https://github.com/demonstrandum-research/artifacts">Artifacts</a> · <a href="/about/#contact">About the author</a></p> <p>No analytics, no cookies; your theme preference stays in your browser.</p> </div> </footer> <script>
-      (function () {
-        var btn = document.getElementById('theme-toggle');
-        if (!btn) return;
-        function current() {
-          return document.documentElement.dataset.theme ||
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        }
-        function label() {
-          // button shows the theme you would switch TO
-          btn.textContent = current() === 'dark' ? 'Light' : 'Dark';
-        }
-        label();
-        btn.addEventListener('click', function () {
-          var next = current() === 'dark' ? 'light' : 'dark';
-          document.documentElement.dataset.theme = next;
-          try { localStorage.setItem('theme', next); } catch (e) {}
-          label();
-        });
-      })();
-    </script> </body> </html>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demonstrandum Research</title>
+<meta name="description" content="Mathematics with machine-checked proofs. Every result is verified by the Lean kernel or an independent certificate checker, and reproducible from public artifacts.">
+<link rel="canonical" href="https://demonstrandum-research.org/">
+<meta property="og:title" content="Demonstrandum Research">
+<meta property="og:description" content="Mathematics with machine-checked proofs. Every result is verified by the Lean kernel or an independent certificate checker, and reproducible from public artifacts.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://demonstrandum-research.org/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mastrow">
+      <h1 class="brand"><a href="/">Demonstrandum</a></h1>
+      <nav class="site">
+        <button id="theme-toggle" class="copybtn" type="button" aria-label="Toggle color theme">Theme</button>
+        <a href="/verify/">Verify</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section>
+      <p>We prove theorems. Every result here is checked by the Lean kernel or an independent certificate checker, and you can <a href="/verify/">reproduce any of it yourself</a> from public artifacts. Directed and reviewed by John Erlbacher, Independent Researcher.</p>
+
+      <div class="shelf">
+        <a class="proj" href="/p/strong-majority/">
+          <span class="date">11 July 2026</span>
+          <h2>Strong Majority Edge-Coloring <span class="chip">kernel-checked</span></h2>
+          <p>Five colors suffice for every admissible graph â€” the theorem of Antoniuk, Prorok &amp; Salia, verified in Lean eleven days after it was posted, by a different proof. With three clarifications to the original argument and the first formalization of Kierstead paths.</p>
+        </a>
+        <a class="proj" href="/p/wave-1/">
+          <span class="date">Juneâ€“July 2026</span>
+          <h2>Wave 1: Thirteen Verified Results <span class="chip mid">certificates + Lean</span></h2>
+          <p>Eleven refutations of published conjectures, one proof of a published conjecture, and one numerical record â€” each backed by a runnable certificate or a kernel-checked Lean proof.</p>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span>John Erlbacher</span>
+      <span id="em" class="muted">erlbacher.research@gmail.com</span>
+      <button class="copybtn" onclick="navigator.clipboard.writeText(document.getElementById('em').textContent).then(()=>{this.textContent='copied';setTimeout(()=>this.textContent='copy email',1200)})">copy email</button>
+      <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
+      <a href="https://github.com/demonstrandum-research">GitHub</a>
+    </div>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Corrections are never silent â€” see <a href="/verify/#corrections">the correction history</a>.</p>
+  </div>
+</footer>
+<script>(function(){var b=document.getElementById("theme-toggle");if(!b)return;function cur(){return document.documentElement.dataset.theme||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}function lab(){b.textContent=cur()==="dark"?"Light":"Dark";}lab();b.addEventListener("click",function(){var n=cur()==="dark"?"light":"dark";document.documentElement.dataset.theme=n;try{localStorage.setItem("theme",n);}catch(e){}lab();});})();</script>
+</body>
+</html>
+

@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verify â€” Demonstrandum Research</title>
+<meta name="description" content="What our verification grades mean, how to check any result on this site yourself, and our correction history.">
+<link rel="canonical" href="https://demonstrandum-research.org/verify/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mastrow">
+      <h1 class="brand"><a href="/">Demonstrandum</a></h1>
+      <nav class="site">
+        <button id="theme-toggle" class="copybtn" type="button" aria-label="Toggle color theme">Theme</button>
+        <a href="/verify/">Verify</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumb"><a href="/">Projects</a> Â· Verify</p>
+    <h1 class="page">Verify it yourself</h1>
+    <p>Nothing on this site asks for trust. Every result is backed by an artifact you can check on your own machine, and every project page states plainly what has been established, by what mechanism, and what has not.</p>
+
+    <section id="grades">
+      <h2>What the grades mean</h2>
+      <p><b>Kernel-checked</b> â€” the entire claim is a Lean&nbsp;4 theorem accepted by the Lean kernel, depending on no axioms beyond the three standard mathlib axioms (<code>propext</code>, <code>Classical.choice</code>, <code>Quot.sound</code>) and containing no <code>sorry</code>. This is the strongest grade we use.</p>
+      <p><b>Certificate (dual-checker)</b> â€” a finite witness (a counterexample, a construction, a computation) accepted by at least two independently written checkers, with mutation testing on the checkers themselves.</p>
+      <p>Each project page also reports, separately: whether the axioms were audited, whether the formal statement was reviewed against the informal claim it represents (a kernel proof is only as good as the statement it proves), and whether the work has received external review. We never collapse these into one badge, because they are different kinds of confidence.</p>
+    </section>
+
+    <section id="how">
+      <h2>How to check a result</h2>
+      <p>Every project page carries its own reproduction block with pinned versions. The general pattern:</p>
+<pre><code>git clone https://github.com/demonstrandum-research/artifacts.git
+cd artifacts
+python verify_all.py            # certificate battery, ~5â€“15 min
+# Lean results: each project pins its toolchain; build with
+#   lake build        (inside the project directory)
+# then inspect the axioms of the main theorem:
+#   #print axioms TheTheoremName</code></pre>
+      <p class="muted small">Requirements: Python 3.10+ with <code>numpy</code> and <code>sympy</code> for certificate checks; <code>elan</code>/<code>lake</code> for Lean rebuilds. A SKIP always means "not verified on this machine" â€” the summary says so loudly.</p>
+    </section>
+
+    <section id="limits">
+      <h2>What verification does not establish</h2>
+      <p>A kernel-checked proof establishes that the formal statement follows from the axioms. It does not by itself establish that the formal statement faithfully captures the informal claim (we review this separately and say so), that the result is novel (we run literature searches and state their scope), or that the work has been externally refereed (we say plainly when it has not). Every project page ends with its limitations.</p>
+    </section>
+
+    <section id="corrections">
+      <h2>Corrections</h2>
+      <p>Corrections here are never silent: a corrected claim keeps its original text visibly struck through or linked, with the date and the reason. We hold ourselves to this in private too â€” our internal audit gate once kernel-refuted one of our own recorded impossibility claims; the correction, its falsifying certificate, and the protocol change it forced are part of the project record.</p>
+      <p class="muted small">No public corrections to date. This line changes the moment that stops being true.</p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span>John Erlbacher</span>
+      <span id="em" class="muted">erlbacher.research@gmail.com</span>
+      <button class="copybtn" onclick="navigator.clipboard.writeText(document.getElementById('em').textContent).then(()=>{this.textContent='copied';setTimeout(()=>this.textContent='copy email',1200)})">copy email</button>
+      <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
+      <a href="https://github.com/demonstrandum-research">GitHub</a>
+    </div>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0.</p>
+  </div>
+</footer>
+<script>(function(){var b=document.getElementById("theme-toggle");if(!b)return;function cur(){return document.documentElement.dataset.theme||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}function lab(){b.textContent=cur()==="dark"?"Light":"Dark";}lab();b.addEventListener("click",function(){var n=cur()==="dark"?"light":"dark";document.documentElement.dataset.theme=n;try{localStorage.setItem("theme",n);}catch(e){}lab();});})();</script>
+</body>
+</html>
+

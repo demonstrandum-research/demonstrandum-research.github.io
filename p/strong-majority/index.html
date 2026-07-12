@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strong Majority Edge-Coloring â€” Demonstrandum Research</title>
+<meta name="description" content="Every admissible graph admits a strong majority edge-coloring with five colors â€” the theorem of Antoniuk, Prorok &amp; Salia, kernel-checked in Lean 4 by a different proof, with three clarifications to the original argument.">
+<link rel="canonical" href="https://demonstrandum-research.org/p/strong-majority/">
+<meta property="og:title" content="Strong Majority Edge-Coloring â€” verified in Lean">
+<meta property="og:description" content="Five colors suffice for every admissible graph â€” kernel-checked in Lean 4 by a different proof, eleven days after the theorem was posted.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://demonstrandum-research.org/p/strong-majority/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mastrow">
+      <h1 class="brand"><a href="/">Demonstrandum</a></h1>
+      <nav class="site">
+        <button id="theme-toggle" class="copybtn" type="button" aria-label="Toggle color theme">Theme</button>
+        <a href="/verify/">Verify</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumb"><a href="/">Projects</a> Â· Strong Majority Edge-Coloring</p>
+    <h1 class="page">Strong Majority Edge-Coloring</h1>
+    <p class="statusline"><b>Kernel-checked</b> <span class="ok">âœ“</span> &nbsp;Â·&nbsp; <b>Axioms audited</b> <span class="ok">âœ“</span> &nbsp;Â·&nbsp; <b>Statement fidelity reviewed</b> <span class="ok">âœ“</span> &nbsp;Â·&nbsp; <b>External review:</b> not yet</p>
+
+    <section>
+      <h2>Two-minute summary</h2>
+      <p>Picture a network of links â€” flights between airports, shifts shared between workers, cables meeting at junction boxes. Two links <em>clash</em> when they share an endpoint. Assign each link one of a fixed set of labels, under a fairness rule: <b>no label may ever hold a majority among the links clashing with any given link.</b> This is weaker than requiring clashing links to always get different labels, but it must hold around every link simultaneously, and that global balancing act is what makes the problem hard. One local configuration makes the rule impossible with any palette â€” a dead-end link whose other endpoint has just one further link; graphs without it are called <em>admissible</em> â€” and the question is how many labels always suffice for the rest.</p>
+      <p>The 2026 paper of Kalinowski, Kamyczura, PilÅ›niak, and WoÅºniak introduced the problem, proved 8 labels always suffice, and conjectured 4 (which would be optimal). Antoniuk, Prorok, and Salia (<a href="https://arxiv.org/abs/2607.00212">arXiv:2607.00212</a>, 30 June 2026) then proved 5 suffice.</p>
+      <p>This project verified that five-color theorem in the Lean&nbsp;4 proof assistant, eleven days after it was posted â€” by a proof route different from the paper's, finished twice over by two independent verification blocks, each rebuilt from source in a clean environment. The close reading that formalization forces also surfaced three clarifications to the paper's written argument (the theorem is unaffected), and the remaining four-color conjecture stays open, now with exact computational evidence in its favor.</p>
+    </section>
+
+    <section>
+      <h2>The result</h2>
+      <p><b>Theorem.</b> <em>Every admissible graph admits a strong majority edge-coloring with five colors.</em> First proved by Antoniukâ€“Prorokâ€“Salia (Theorem 2 of arXiv:2607.00212); verified here as the Lean declaration <code>SMaj.Synthesis.maj_le_five</code>, on toolchain <code>leanprover/lean4:v4.28.0</code> with mathlib pinned, 11 July 2026.</p>
+<pre><code>def Admissible : Prop :=
+  âˆ€ u v, G.Adj u v â†’ G.degree u + G.degree v â‰  3
+
+def IsStrongMajority (c : Sym2 V â†’ C) : Prop :=
+  âˆ€ u v, G.Adj u v â†’ âˆ€ Î± : C,
+    nColor G c u v Î± â‰¤ (G.degree u + G.degree v - 2) / 2
+
+theorem maj_le_five (G : SimpleGraph V) [DecidableRel G.Adj]
+    (hadm : Admissible G) :
+    âˆƒ c : Sym2 V â†’ Fin 5, IsStrongMajority G c</code></pre>
+      <p>Gloss: <code>nColor G c u v Î±</code> counts the edges adjacent to the edge <code>uv</code> that receive color Î±; the bound is the integer floor of half the number of adjacent edges; <code>Admissible</code> (no adjacent degree pair summing to 3) is equivalent to "no degree-1 vertex adjacent to a degree-2 vertex." The axiom audit returns exactly <code>[propext, Classical.choice, Quot.sound]</code> â€” the three standard mathlib axioms; no <code>sorry</code>, no <code>native_decide</code>. The artifact's reading kit walks every definition down to mathlib bedrock, with small <code>#eval</code>/<code>decide</code> demonstrations so the definitions themselves need no trust.</p>
+    </section>
+
+    <section>
+      <h2>Two proof routes</h2>
+      <p>The paper's proof and the verified proof share their classical ancestry â€” both reduce the fairness rule to a structured edge-coloring problem and spend the fifth color on the residue â€” but their engines differ.</p>
+      <p><b>The paper's route</b> (published; not the one formalized): trim the graph by five surgical reductions â€” remove loop-shaped ears, ears at degree-five vertices, short ears, long ears, and add a leaf wherever the degree is a multiple of five â€” apply the <b>Hiltonâ€“de Werra equitable coloring theorem</b> (every vertex sees each of the 5 colors almost equally often), then undo the five reductions in reverse, recoloring locally each time, spending the freed fifth color at the former degree-five vertices.</p>
+      <p><b>The verified route</b> (kernel-checked end to end): decompose the graph into <em>chains</em> (paths through degree-2 vertices) running between <em>junctions</em> (vertices of degree â‰¥ 3); at each junction, bundle the incident edge-slots into at most âŒˆd/4âŒ‰ groups of size â‰¤ 4; contract every short chain to a single edge between groups, producing a small auxiliary graph M; simplify M by two local rules until it is a simple graph of maximum degree 4; apply <b>Vizing's theorem</b> (Ï‡â€² â‰¤ Î” + 1, so 5 colors properly edge-color M); reinsert the removed parallel edges greedily, then transport the coloring back onto the original graph, filling long-chain interiors by a list-avoidance lemma. A four-condition interface ("glue colorings"), kernel-checked in this program's earlier six-color formalization, converts all of this into the strong majority property.</p>
+      <p>The two routes share their hard core: any equitable-coloring statement strong enough at degree-4 vertices already contains Vizing-at-Î”=4 as a special case. They differ in all the plumbing around it. The verified proof was developed with the paper's statement in hand â€” an <b>alternative proof, not an independent discovery</b>. The full story of how it was found, stress-tested, and machine-checked: <a href="/p/strong-majority/two-routes/">Two Routes to Five Colors</a>.</p>
+    </section>
+
+    <section>
+      <h2>Clarifications to the original argument</h2>
+      <p>The theorem survives every item below unaffected. Formalization-grade reading of the paper surfaced three points in the written argument that need repair or tidying; each was confirmed by a second, adversarial internal review working directly from the hash-pinned arXiv v1 LaTeX source, and all three were communicated privately to the authors, with repairs, before this page went live. These are prose mathematics, not kernel-checked.</p>
+      <ul>
+        <li><b>Minor:</b> the displayed inequality in the proof of the paper's Theorem 4 (the four-color result for graphs with no degree-2 or degree-4 vertices) fails at degree-1 vertices. The conclusion stands: a one-line count using the bound only at the other endpoint restores it â€” the authors handle exactly this subtlety in their five-color proof, but the corresponding step is omitted in Theorem 4's.</li>
+        <li><b>Editorial:</b> the proof of the paper's Claim 10 contains two consecutive drafts of the same "Case k = 1" paragraph. The count both drafts rely on is correct.</li>
+        <li><b>Substantive:</b> in undoing the first reduction (R1), the written proof specifies how to restore a degree-5 vertex that lost <em>one</em> loop ear, but a degree-5 vertex carrying <em>two</em> loop ears â€” a legitimate admissible configuration â€” finishes the reduction phase holding three auxiliary leaves, a state neither restoration paragraph covers. A repair using only the paper's own tools (its Claim 8 balance property and the distinctness argument of its Remark 9, feeding its Claim 10 extension) closes the case.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Documents</h2>
+      <div class="shelfrow">
+        <div class="item"><span class="kind">Paper</span><a href="LINK-PENDING-PAPER">Strong Majority Edge-Coloring with Five Colors: A Lean Verification and an Alternative Proof</a><span class="note">The full mathematical writeup: the verified route, the verification, and the clarifications appendix.</span></div>
+        <div class="item"><span class="kind">Chronicle</span><a href="/p/strong-majority/two-routes/">Two Routes to Five Colors</a><span class="note">How the alternative proof was found, broken, repaired, raced, and checked â€” with pre-registered predictions and their outcomes.</span></div>
+        <div class="item"><span class="kind">Artifact</span><a href="LINK-PENDING-DOI">Lean artifact (archived, DOI)</a><span class="note">Lean sources, pinned toolchain, axiom-audit outputs, build logs, one-command rebuild script.</span></div>
+        <div class="item"><span class="kind">Reproduce</span><a href="LINK-PENDING-REPRODUCE">One-command verification instructions</a><span class="note">Rebuild the proof and re-run the axiom audit on your own machine.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Reproduce it</h2>
+      <p>The artifact rebuilds from source with the pinned toolchain and prints its own axiom audit â€” no trust in us or in any AI required:</p>
+<pre><code># toolchain pinned in-repo: leanprover/lean4:v4.28.0 (elan reads it automatically)
+# 1. download and unpack the archived bundle:      LINK-PENDING-DOI
+# 2. inside the project directory:
+lake build            # full rebuild: 8,037 jobs, exits 0
+# 3. audit the axioms of the main theorem:
+#    #print axioms SMaj.Synthesis.maj_le_five
+#    -- expected output: [propext, Classical.choice, Quot.sound]</code></pre>
+      <p class="muted small">Two independent proof completions of the same frozen statement are included; each was gate-checked in its own clean environment. Full instructions: <a href="LINK-PENDING-REPRODUCE">LINK-PENDING-REPRODUCE</a>.</p>
+    </section>
+
+    <section>
+      <h2>Provenance</h2>
+      <p>These results were produced by Demonstrandum, an autonomous mathematical research system directed by the author. Demonstrandum orchestrates frontier AI reasoning models â€” currently OpenAI's GPT series, Anthropic's Claude, and Harmonic's Aristotle, among other tools â€” within a proprietary architecture for problem selection, sustained attack, adversarial internal review, and machine verification. Its defining discipline is that no claim rests on any model's output: every result is reduced to independently checkable artifacts before it is stated. In this project, the construction core of the final lemma was built by an OpenAI reasoning model; the Vizing lemma was proved by an Anthropic model; Harmonic's Aristotle contributed machine-found proofs of several lemmas and components; and the finished theorem was verified twice, by two independently produced verification blocks. The system's architecture is not published at this time; its outputs are fully transparent and reproducible from the accompanying artifacts, and the author â€” John Erlbacher â€” directed the work, audited every acceptance, and takes sole responsibility for all claims.</p>
+      <p>On priority, calibrated: the theorem is Antoniukâ€“Prorokâ€“Salia's, and we claim no "first" for the headline result beyond the verification itself. The one prior formalization of Vizing's theorem (Bhoja, <a href="https://arxiv.org/abs/2512.13999">arXiv:2512.13999</a>) uses a bespoke graph type; the only mathlib-based edge-coloring development we found is a 2023 course project proving the easy lower bound; the Kierstead-path recoloring machinery formalized here is, to our knowledge, the first in any proof assistant (we searched mathlib, GitHub Lean code, the Isabelle AFP, Coq/MathComp, the Mizar MML, Metamath, the 100/1000+ theorem lists, and arXiv). Corrections welcome.</p>
+    </section>
+
+    <section>
+      <h2>What remains open</h2>
+      <p>The four-color conjecture of Kalinowski, Kamyczura, PilÅ›niak, and WoÅºniak â€” Majâ€²(G) â‰¤ 4 for every admissible graph (Conjecture 14 of <a href="https://arxiv.org/abs/2605.23828">arXiv:2605.23828</a>) â€” is open, and the bound 4 would be optimal: some admissible graphs need four colors (the star K<sub>1,4</sub>; subdivided snarks).</p>
+      <p><b>Exact computation</b> (evidence, not proof): every one of the 268,478 admissible graphs on â‰¤ 9 vertices satisfies Majâ€² â‰¤ 4; earlier program sweeps covering â‰ˆ 530 million admissible graphs (all connected admissible graphs on â‰¤ 10 vertices, plus larger degree-capped families) found none requiring five colors; the smallest graph requiring four is the "paw" â€” a triangle with a pendant edge. No admissible graph requiring five colors has ever been observed.</p>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <ul>
+        <li><b>The four-color conjecture remains open.</b> This work verifies the five-color theorem; the census evidence for 4 is exact computation on small graphs â€” evidence, not proof.</li>
+        <li><b>The theorem is not ours.</b> Priority for Majâ€² â‰¤ 5 belongs to Antoniuk, Prorok, and Salia. Our contributions are the machine verification and the alternative proof route, found with their statement known.</li>
+        <li><b>The formal-to-informal bridge is human-checked.</b> The kernel guarantees the Lean theorem as stated; that the formal definitions faithfully transcribe the paper's (integer floors, admissibility, adjacency conventions) is argued in the reading kit with itemized quotations and small-case <code>decide</code> demonstrations â€” rigorous, but a human-audited step by nature.</li>
+        <li><b>Standalone artifact, not a mathlib contribution.</b> It builds against a pinned toolchain and vendors its own edge-coloring machinery, including Vizing at Î” â‰¤ 4 in the artifact's multigraph encoding â€” not full generality. Upstreaming is planned, not done.</li>
+        <li><b>Verification redundancy has one documented caveat.</b> The two proof completions share the construction skeleton (one prover's construction, two independent verification blocks): independent as verifications, not as top-to-bottom independent proofs. One auxiliary lemma (Î›1) was proved and confirmed but is not a dependency of the shipped theorem, which routes through equivalent in-file machinery.</li>
+        <li><b>No external review yet.</b> The work passed adversarial internal review (hostile refereeing, an adversarial instance battery, independent rebuilds); no outside referee has read it. The paper's authors were notified privately before release. Corrections will be logged, dated, never silent.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span>John Erlbacher</span>
+      <span id="em" class="muted">erlbacher.research@gmail.com</span>
+      <button class="copybtn" onclick="navigator.clipboard.writeText(document.getElementById('em').textContent).then(()=>{this.textContent='copied';setTimeout(()=>this.textContent='copy email',1200)})">copy email</button>
+      <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
+      <a href="https://github.com/demonstrandum-research">GitHub</a>
+    </div>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Corrections are never silent â€” see <a href="/verify/#corrections">the correction history</a>.</p>
+  </div>
+</footer>
+<script>(function(){var b=document.getElementById("theme-toggle");if(!b)return;function cur(){return document.documentElement.dataset.theme||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}function lab(){b.textContent=cur()==="dark"?"Light":"Dark";}lab();b.addEventListener("click",function(){var n=cur()==="dark"?"light":"dark";document.documentElement.dataset.theme=n;try{localStorage.setItem("theme",n);}catch(e){}lab();});})();</script>
+</body>
+</html>
+
