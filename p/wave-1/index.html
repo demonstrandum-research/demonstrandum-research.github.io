@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wave 1: Thirteen Verified Results &mdash; Demonstrandum Research</title>
-<meta name="description" content="Eleven refutations of published conjectures, one proof of a published conjecture, and one numerical record &mdash; each backed by a runnable certificate or a kernel-checked Lean proof.">
+<title>Wave 1: Feasibility Study &mdash; Demonstrandum Research</title>
+<meta name="description" content="A feasibility study comprising eleven refutations of conjectures as stated, one Lean proof, and one numerical record, with checkable artifacts.">
 <link rel="canonical" href="https://demonstrandum-research.org/p/wave-1/">
-<meta property="og:title" content="Wave 1: Thirteen Verified Results">
-<meta property="og:description" content="Eleven refutations, one proof, one record &mdash; each mechanically checkable from public artifacts.">
+<meta property="og:title" content="Wave 1: Feasibility Study">
+<meta property="og:description" content="Thirteen mechanically checked results from the feasibility study: eleven refutations, one Lean proof, and one numerical record.">
 <meta property="og:type" content="article">
+<meta property="og:url" content="https://demonstrandum-research.org/p/wave-1/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
@@ -27,12 +28,13 @@
 <main>
   <div class="wrap">
     <p class="crumb"><a href="/">Projects</a> &middot; Wave 1</p>
-    <h1 class="page">Wave 1: Thirteen Verified Results</h1>
+    <h1 class="page">Wave 1: Feasibility Study</h1>
     <p class="statusline"><b>Certificates:</b> dual-checker <span class="ok">&#10003;</span> &nbsp;&middot;&nbsp; <b>Lean results:</b> kernel-checked <span class="ok">&#10003;</span> &nbsp;&middot;&nbsp; <b>Statements:</b> frozen verbatim from sources <span class="ok">&#10003;</span> &nbsp;&middot;&nbsp; <b>External review:</b> not yet</p>
-    <p class="framing-note">Feasibility study &middot; the operation's shakedown run, comprising 13 verified results.</p>
 
-    <section>
-      <p>The operation's first release wave: eleven refutations of published conjectures, one proof of a published conjecture (Elizalde&ndash;Luo), and one numerical record &mdash; each frozen verbatim from its source before attack, and each backed by a runnable certificate accepted by independent checkers or a Lean&nbsp;4 proof accepted by the kernel. Every result carries a per-result "what this does <em>not</em> show" caveat in the artifact record.</p>
+    <section class="article-lede">
+      <p>Wave 1 was a feasibility study of the operating procedure: freeze a conjecture exactly as stated in its source, attack that statement, verify any result through independent exact checkers or the Lean kernel, and release the supporting record. It was intended to test the pipeline before work moved to harder targets, not to establish a general success rate.</p>
+      <p>The resulting portfolio contains thirteen results: eleven refutations of conjectures as stated, one proof of the Elizalde&ndash;Luo {1132, 3312} conjecture in Lean&nbsp;4, and the lower bound C(13)&nbsp;&ge;&nbsp;36 for the &ldquo;no 5 on a sphere&rdquo; problem. The refutations include qualifications that matter to their scope: the Graffiti 154 result uses the standard-deviation reading; the Sun result refutes part&nbsp;(ii), not part&nbsp;(i); and the three solubilizer results carry the restrictions recorded in the catalog.</p>
+      <p>The study established that this workflow could produce a mixed portfolio of kernel-checked theorems and finite certificates with recorded verification gates. It did not establish novelty by mechanical means, replace the human review of statement fidelity, or provide external refereeing. None of these results has been externally refereed.</p>
     </section>
 
     <section>
@@ -41,16 +43,16 @@
         <table>
           <thead><tr><th>Result</th><th>Grade</th><th>Artifact</th></tr></thead>
           <tbody>
-            <tr><td>Elizalde&ndash;Luo {1132, 3312} conjecture &mdash; proved in Lean 4</td><td>kernel</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/elizalde-luo">paper</a></td></tr>
-            <tr><td>Discrete Borsuk Conjecture 3 (arXiv:2508.20009) &mdash; disproved in Lean 4</td><td>kernel</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/borsuk">paper</a></td></tr>
-            <tr><td>C(13) &ge; 36 record ("no 5 on a sphere") &mdash; improves C(12) &ge; 33</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/no5sphere-record">paper</a></td></tr>
-            <tr><td>Sun Conjecture 4.6 (arXiv:2108.07723) &mdash; refuted at p = 29</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/sun-46">paper</a></td></tr>
-            <tr><td>Graffiti Conjectures 143 &amp; 154 (std-dev reading) &mdash; refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/graffiti-143-154">paper</a></td></tr>
-            <tr><td>IRIS Conjecture 6.1 ("NuevaMirada") &mdash; refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>TxGraffiti / Davila Conjecture 9 &mdash; refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Pandey parity conjecture &mdash; refuted (both directions)</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Solubilizer Conjectures A.1, A.13, A.16 (arXiv:2412.16177) &mdash; refuted</td><td>dual-checker / audit-panel</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Koch&ndash;Narayan Conjecture 1 &mdash; refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
+            <tr><td>Elizalde&ndash;Luo {1132, 3312} conjecture &mdash; proved in Lean&nbsp;4</td><td>kernel</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/elizalde-luo">paper</a></td></tr>
+            <tr><td>Discrete Borsuk Conjecture&nbsp;3 (arXiv:2508.20009) &mdash; refuted in Lean&nbsp;4</td><td>kernel</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/borsuk">paper</a></td></tr>
+            <tr><td>C(13)&nbsp;&ge;&nbsp;36 record (&ldquo;no 5 on a sphere&rdquo;) &mdash; improves C(12)&nbsp;&ge;&nbsp;33</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/no5sphere-record">paper</a></td></tr>
+            <tr><td>Sun Conjecture&nbsp;4.6(ii) (arXiv:2108.07723) &mdash; refuted at p&nbsp;=&nbsp;29</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/sun-46">paper</a></td></tr>
+            <tr><td>Graffiti Conjectures&nbsp;143 and&nbsp;154 (standard-deviation reading) &mdash; refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/graffiti-143-154">paper</a></td></tr>
+            <tr><td>IRIS Conjecture&nbsp;6.1 (&ldquo;NuevaMirada&rdquo;) &mdash; refuted as printed</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
+            <tr><td>TxGraffiti / Davila Conjecture&nbsp;9 &mdash; refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
+            <tr><td>Pandey parity conjecture &mdash; refuted in both directions</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
+            <tr><td>Solubilizer Conjectures A.1, A.13, and A.16 (arXiv:2412.16177) &mdash; refuted</td><td>dual-checker / audit-panel</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
+            <tr><td>Koch&ndash;Narayan Conjecture&nbsp;1 &mdash; refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
           </tbody>
         </table>
       </div>
@@ -59,15 +61,15 @@
     <section>
       <h2>Artifacts</h2>
       <div class="shelfrow">
-        <div class="item"><span class="kind">Archive</span><a href="https://doi.org/10.5281/zenodo.21264100">Zenodo DOI 10.5281/zenodo.21264100</a><span class="note">Citable frozen snapshot: papers, certificates, checkers, verification code.</span></div>
-        <div class="item"><span class="kind">Source</span><a href="https://github.com/demonstrandum-research/artifacts">github.com/demonstrandum-research/artifacts</a><span class="note">Complete repository with the one-command battery: <code>python verify_all.py</code>.</span></div>
-        <div class="item"><span class="kind">Record</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a><span class="note">Exact statements, frozen sources, and per-result caveats.</span></div>
+        <div class="item"><span class="kind">Archive</span><a href="https://doi.org/10.5281/zenodo.21264100">Zenodo DOI 10.5281/zenodo.21264100</a><span class="note">Frozen snapshot of the papers, certificates, checkers, and verification code.</span></div>
+        <div class="item"><span class="kind">Source</span><a href="https://github.com/demonstrandum-research/artifacts">github.com/demonstrandum-research/artifacts</a><span class="note">Repository and verification battery: <code>python verify_all.py</code>.</span></div>
+        <div class="item"><span class="kind">Record</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a><span class="note">Frozen statements, verification grades, provenance, and per-result qualifications.</span></div>
       </div>
     </section>
 
     <section>
       <h2>Limitations</h2>
-      <p>These results have not been externally refereed. Refutations are finite and mechanical &mdash; the strongest kind of claim to check &mdash; but novelty statements rest on our own literature searches, whose scope is recorded per result. Statement-fidelity (that each frozen formal statement represents the cited conjecture) was reviewed internally and is documented in the artifact record.</p>
+      <p>These results have not been externally refereed. Mechanical verification establishes the formal claim checked, not its novelty or the fidelity of the formalization to the cited informal statement. Those questions were reviewed internally and are documented separately for each result. Refutations apply to the conjectures as stated; the catalog records any surviving variant, untested range, reading dependence, or other limitation.</p>
     </section>
   </div>
 </main>

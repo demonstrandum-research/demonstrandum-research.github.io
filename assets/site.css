@@ -36,9 +36,11 @@ nav.site-nav{display:flex; gap:1.3rem; align-items:baseline; font-family:var(--s
 nav.site-nav a{color:var(--masthead-faint); text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent}
 nav.site-nav a:hover{color:var(--masthead-fg); text-decoration:none}
 nav.site-nav a[aria-current=page]{color:var(--masthead-fg); border-bottom-color:var(--gold)}
-main{padding:2.2rem 0 1rem}
-.home-main{padding:4.8rem 0 3.6rem}
-.home-main section{margin-bottom:3.6rem}
+main{padding:2.4rem 0 1.2rem}
+.home-main{padding:4.4rem 0 4.6rem}
+.home-main section{margin-bottom:0}
+.home-main .shelf{margin-top:0}
+.home-main + footer{margin-top:0}
 section{margin:0 0 2.6rem}
 h1.page{font-size:1.75rem; letter-spacing:-.01em; line-height:1.25; margin:0 0 .5rem; font-weight:700}
 h2{font-size:1.3rem; letter-spacing:-.005em; margin:2.2rem 0 .8rem}
@@ -79,10 +81,13 @@ p code, li code, td code{background:var(--code-bg); padding:.1rem .35rem; border
 blockquote{border-left:3px solid var(--rule); margin:0 0 1rem; padding:.1rem 0 .1rem 1rem; color:var(--ink-soft)}
 ul{margin:0 0 1rem; padding-left:1.2rem}
 li{margin:.25rem 0}
-.table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch}
+.table-scroll{max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch}
 table{border-collapse:collapse; width:100%; font-size:.92rem}
 th,td{text-align:left; padding:.55rem .65rem; border-bottom:1px solid var(--rule-soft); vertical-align:top}
 th{font-family:var(--sans); font-size:.74rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); font-weight:600}
+tbody tr:last-child td{border-bottom:0}
+.article-lede{margin-top:2.2rem}
+.crumb, .item, td, footer{overflow-wrap:anywhere}
 
 footer{border-top:1px solid var(--rule); padding:2rem 0 3rem; font-size:.92rem; color:var(--ink-soft); margin-top:2rem; font-family:var(--sans)}
 footer .contact{display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1.3rem; margin-bottom:.9rem}
@@ -91,5 +96,11 @@ footer .fine{font-size:.8rem; color:var(--ink-faint)}
 @media (max-width:480px){
   .mastrow{align-items:flex-start; flex-direction:column}
   .brand .wordmark{font-size:1.5rem}
-  .home-main{padding:3.6rem 0 2.6rem}
+  .wrap{padding:0 1rem}
+  main{padding-top:1.8rem}
+  .home-main{padding:3.2rem 0 3.4rem}
+  h1.page{font-size:1.55rem}
+  h2{font-size:1.2rem}
+  .proj{padding:1.1rem}
+  th,td{padding:.5rem .55rem}
 }
