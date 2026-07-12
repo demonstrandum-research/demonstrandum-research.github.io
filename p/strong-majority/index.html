@@ -29,7 +29,6 @@
   <div class="wrap">
     <p class="crumb"><a href="/">Projects</a> &middot; Strong Majority Edge-Coloring</p>
     <h1 class="page">Strong Majority Edge-Coloring</h1>
-    <p class="statusline"><b>Kernel-checked</b> <span class="ok">&#10003;</span> &nbsp;&middot;&nbsp; <b>Axioms audited</b> <span class="ok">&#10003;</span> &nbsp;&middot;&nbsp; <b>Statement fidelity reviewed</b> <span class="ok">&#10003;</span> &nbsp;&middot;&nbsp; <b>External review:</b> not yet</p>
 
     <section>
       <h2>Overview</h2>
@@ -73,6 +72,16 @@ theorem maj_le_five (G : SimpleGraph V) [DecidableRel G.Adj]
     </section>
 
     <section>
+      <h2>Artifacts</h2>
+      <p>The Lean theorem is kernel-checked, its axioms have been audited, and statement fidelity has been human-reviewed; the work has not received external review.</p>
+      <div class="shelfrow">
+        <div class="item"><span class="kind">Archive</span><a href="https://doi.org/10.5281/zenodo.21316624">Zenodo DOI 10.5281/zenodo.21316624</a><span class="note">Citable frozen archive of the paper and verification artifact.</span></div>
+        <div class="item"><span class="kind">Paper</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/papers/five-colors/main.md">Strong Majority Edge-Coloring with Five Colors</a><span class="note">The verification paper and alternative proof.</span></div>
+        <div class="item"><span class="kind">Reading kit</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/papers/five-colors/artifact/README.md">Reading kit + rebuild instructions</a><span class="note">Statement-fidelity record, pinned environment, and clean rebuild procedure.</span></div>
+      </div>
+    </section>
+
+    <section>
       <h2>Related</h2>
       <div class="shelfrow">
         <div class="item"><span class="kind">Chronicle</span><a href="/p/strong-majority/two-routes/">Two Routes to Five Colors</a><span class="note">How the alternative proof was found, broken, repaired, raced, and checked &mdash; with pre-registered predictions and their outcomes.</span></div>
@@ -96,7 +105,7 @@ theorem maj_le_five (G : SimpleGraph V) [DecidableRel G.Adj]
       <ul>
         <li><b>The four-color conjecture remains open.</b> This work verifies the five-color theorem; the census evidence for 4 is exact computation on small graphs &mdash; evidence, not proof.</li>
         <li><b>The theorem is not ours.</b> Priority for Maj&prime; &le; 5 belongs to Antoniuk, Prorok, and Salia. Our contributions are the machine verification and the alternative proof route, found with their statement known.</li>
-        <li><b>The formal-to-informal bridge is human-checked.</b> The kernel guarantees the Lean theorem as stated; that the formal definitions faithfully transcribe the paper's (integer floors, admissibility, adjacency conventions) is argued in the reading kit with itemized quotations and small-case <code>decide</code> demonstrations &mdash; rigorous, but a human-audited step by nature.</li>
+        <li><b>The formal-to-informal bridge is human-checked.</b> The kernel guarantees the Lean theorem as stated; that the formal definitions faithfully transcribe the paper's (integer floors, admissibility, adjacency conventions) is argued in the <a href="https://github.com/demonstrandum-research/artifacts/blob/main/papers/five-colors/artifact/README.md">reading kit</a> with itemized quotations and small-case <code>decide</code> demonstrations &mdash; rigorous, but a human-audited step by nature.</li>
         <li><b>Standalone artifact, not a mathlib contribution.</b> It builds against a pinned toolchain and vendors its own edge-coloring machinery, including Vizing at &Delta; &le; 4 in the artifact's multigraph encoding &mdash; not full generality. Upstreaming is planned, not done.</li>
         <li><b>Verification redundancy has one documented caveat.</b> The two proof completions share the construction skeleton (one prover's construction, two independent verification blocks): independent as verifications, not as top-to-bottom independent proofs. One auxiliary lemma (&Lambda;1) was proved and confirmed but is not a dependency of the shipped theorem, which routes through equivalent in-file machinery.</li>
         <li><b>No external review yet.</b> The work passed adversarial internal review (hostile refereeing, an adversarial instance battery, independent rebuilds); no outside referee has read it. The paper's authors were notified privately before release. Corrections will be logged, dated, never silent.</li>

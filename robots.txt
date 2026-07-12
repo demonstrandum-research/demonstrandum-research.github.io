@@ -1,5 +1,2 @@
-# Soft launch — crawling disabled for owner review. Remove this block (and
-# the per-page noindex meta in src/layouts/Base.astro) at full launch, per
-# EDITORIAL.md / DEPLOY.md.
 User-agent: *
-Disallow: /
+Allow: /
