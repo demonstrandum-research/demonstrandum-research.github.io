@@ -1,47 +1,47 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Demonstrandum Research</title>
-<meta name="description" content="Mathematics with machine-checked proofs. Every result is verified by the Lean kernel or an independent certificate checker, and reproducible from public artifacts.">
+<meta name="description" content="Machine-verified mathematics from Demonstrandum Research.">
 <link rel="canonical" href="https://demonstrandum-research.org/">
 <meta property="og:title" content="Demonstrandum Research">
-<meta property="og:description" content="Mathematics with machine-checked proofs. Every result is verified by the Lean kernel or an independent certificate checker, and reproducible from public artifacts.">
+<meta property="og:description" content="Machine-verified mathematics from Demonstrandum Research.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://demonstrandum-research.org/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}})();</script>
 <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 <header class="masthead">
   <div class="wrap">
     <div class="mastrow">
-      <h1 class="brand"><a href="/"><span class="wordmark">Demonstrandum</span><span class="byline">Autonomous mathematical research · <strong>John Erlbacher</strong></span></a></h1>
+      <h1 class="brand"><a href="/"><span class="wordmark">Demonstrandum</span><span class="byline">Autonomous mathematical research &middot; <strong>John Erlbacher</strong></span></a></h1>
       <nav class="site-nav">
-        <a href="/verify/">Verify</a>
-        <button id="theme-toggle" type="button" aria-label="Toggle color theme">Theme</button>
+        <a href="/about/">About</a>
       </nav>
     </div>
   </div>
 </header>
 
-<main>
+<main class="home-main">
   <div class="wrap">
     <section>
-      <p>We prove theorems. Every result here is checked by the Lean kernel or an independent certificate checker, and you can <a href="/verify/">reproduce any of it yourself</a> from public artifacts. Directed and reviewed by John Erlbacher, Independent Researcher.</p>
+      <p>Machine-verified mathematics.</p>
 
       <div class="shelf">
         <a class="proj" href="/p/strong-majority/">
           <span class="date">11 July 2026</span>
-          <h2>Strong Majority Edge-Coloring <span class="chip">kernel-checked</span></h2>
-          <p>Five colors suffice for every admissible graph â€” the theorem of Antoniuk, Prorok &amp; Salia, verified in Lean eleven days after it was posted, by a different proof. With three clarifications to the original argument and the first formalization of Kierstead paths.</p>
+          <h2>Strong Majority Edge-Coloring</h2>
+          <span class="category">Formal verification &middot; graph coloring</span>
+          <p>Five colors suffice for every admissible graph &mdash; the theorem of Antoniuk, Prorok &amp; Salia, verified in Lean eleven days after it was posted, by a different proof. With three clarifications to the original argument and the first formalization of Kierstead paths.</p>
         </a>
         <a class="proj" href="/p/wave-1/">
-          <span class="date">Juneâ€“July 2026</span>
-          <h2>Wave 1: Thirteen Verified Results <span class="chip mid">certificates + Lean</span></h2>
-          <p>Eleven refutations of published conjectures, one proof of a published conjecture, and one numerical record â€” each backed by a runnable certificate or a kernel-checked Lean proof.</p>
+          <span class="date">June&ndash;July 2026</span>
+          <h2>Wave 1: Thirteen Verified Results</h2>
+          <span class="category">Feasibility study &middot; 13 verified results</span>
+          <p>The operation's shakedown run: a feasibility study spanning eleven refutations, one proof, and one numerical record.</p>
         </a>
       </div>
     </section>
@@ -52,15 +52,12 @@
   <div class="wrap">
     <div class="contact">
       <span>John Erlbacher</span>
-      <span id="em" class="muted">erlbacher.research@gmail.com</span>
-      <button class="copybtn" onclick="navigator.clipboard.writeText(document.getElementById('em').textContent).then(()=>{this.textContent='copied';setTimeout(()=>this.textContent='copy email',1200)})">copy email</button>
+      <span class="muted">erlbacher.research@gmail.com</span>
       <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
       <a href="https://github.com/demonstrandum-research">GitHub</a>
     </div>
-    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Corrections are never silent â€” see <a href="/verify/#corrections">the correction history</a>.</p>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Corrections are never silent &mdash; see <a href="/about/#corrections">the correction history</a>.</p>
   </div>
 </footer>
-<script>(function(){var b=document.getElementById("theme-toggle");if(!b)return;function cur(){return document.documentElement.dataset.theme||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}function lab(){b.textContent=cur()==="dark"?"Light":"Dark";}lab();b.addEventListener("click",function(){var n=cur()==="dark"?"light":"dark";document.documentElement.dataset.theme=n;try{localStorage.setItem("theme",n);}catch(e){}lab();});})();</script>
 </body>
 </html>
-
