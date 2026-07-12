@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graffiti 143 and 154, Refuted &mdash; Demonstrandum</title>
+<meta name="description" content="Fajtlowicz's Graffiti conjectures 143 and 154, both listed open in the 2025 Roucairol&ndash;Cazenave survey, are false as stated under the documented readings, with counterexamples at n = 37/39 and n = 118.">
+<link rel="canonical" href="https://demonstrandum-research.org/p/graffiti-143-154/">
+<meta property="og:title" content="Two Graffiti Conjectures on Graph Eigenvalues, Refuted">
+<meta property="og:description" content="Exact certificates refute Graffiti 143 under both average-distance conventions and Graffiti 154 under the standard-deviation reading.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://demonstrandum-research.org/p/graffiti-143-154/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mastrow">
+      <h1 class="brand"><a href="/"><span class="wordmark">Demonstrandum</span><span class="byline">Machine-assisted mathematics &middot; <strong>John Erlbacher</strong></span></a></h1>
+      <nav class="site-nav">
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumb"><a href="/">Projects</a> &middot; <a href="/p/wave-1/">Feasibility study</a> &middot; <span>Graffiti 143 and 154</span></p>
+    <h1 class="page">Two Graffiti Conjectures on Graph Eigenvalues, Refuted</h1>
+    <p class="muted small">June 2026 &middot; dual-checker &middot; not externally refereed</p>
+
+    <section>
+      <p class="article-lede"><em>Exact dumbbell and lollipop witnesses expose two reading-sensitive failures beyond earlier search horizons.</em></p>
+      <p>Graffiti Conjecture 143 is false as stated for connected graphs under both standard conventions for average distance, and Conjecture 154 is false as stated under the standard-deviation reading of &ldquo;deviation,&rdquo; again under both conventions. Exact interval and Sturm calculations certify the counterexamples, which lie beyond the search ranges reported in a 2025 survey.</p>
+      <p>The statements appear in S. Fajtlowicz's July 2004 <em>Written on the Wall</em> compilation and compare eigenvalue statistics with graph size and average distance. Both were listed open in the Roucairol&ndash;Cazenave ECAI 2025 survey (arXiv:2409.18626).</p>
+      <p>The authors were notified privately.</p>
+    </section>
+
+    <section>
+      <h2>The frozen statements</h2>
+      <p>The glyph-decoded July 2004 compilation states:</p>
+      <ul>
+        <li><b>Conjecture 143:</b> &ldquo;variance of positive eigenvalues &le; size / average distance.&rdquo;</li>
+        <li><b>Conjecture 154:</b> &ldquo;deviation of eigenvalues &le; n / average distance.&rdquo;</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Conjecture 143</h2>
+      <p>For average distance 2W/n&sup2;, dumbbell(7,12,20) with n = 39 is a certified counterexample. It also violates the distinct-pairs convention 2W/(n(n&minus;1)). For that second convention, dumbbell(6,12,19) already gives a counterexample at n = 37.</p>
+      <p>All margins are certified by exact rational interval arithmetic of width &le; 2&#8315;&#8311;&#8304;. No floating-point computation lies on the acceptance path.</p>
+    </section>
+
+    <section>
+      <h2>Conjecture 154</h2>
+      <p>Under the standard-deviation reading used by Favaron&ndash;Mah&eacute;o&ndash;Sacl&eacute; in 1993 and by the only known machine formalization, the printed inequality fails under both average-distance conventions. The violation reduces to the integer inequality 8mW&sup2; &gt; n&#8309;(n&minus;1)&sup2;, or respectively 8mW&sup2; &gt; n&#8311;.</p>
+      <p>Certified counterexamples are lollipop(48,70) at n = 118, lollipop(50,70) at n = 120, and lollipop(72,72) at n = 144; the last violates both conventions.</p>
+    </section>
+
+    <section>
+      <h2>Prior searches</h2>
+      <p>The 2025 survey reports that Conjecture 143 was searched through size 100 by eight algorithms and Conjecture 154 through size 50. Conjecture 154 also survived the 1990&ndash;91 BDF attack. The certified violations lie beyond those prior search horizons.</p>
+    </section>
+
+    <section>
+      <h2>Artifacts</h2>
+      <div class="shelfrow">
+        <div class="item"><span class="kind">Preprint</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/papers/graffiti-143-154/note.pdf">Graffiti 143 and 154</a><span class="note">The full preprint covering both conjectures.</span></div>
+        <div class="item"><span class="kind">143 write-up</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p2-factory/kills/graffiti-143/WRITEUP.md">WRITEUP.md</a><span class="note">Statement readings and exact verification.</span></div>
+        <div class="item"><span class="kind">143 certificate</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p2-factory/kills/graffiti-143/certificate_g143.json">certificate_g143.json</a><span class="note">Certified dumbbell counterexamples.</span></div>
+        <div class="item"><span class="kind">143 checker</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p2-factory/kills/graffiti-143/checker_g143.py">checker_g143.py</a><span class="note">Exact interval checker.</span></div>
+        <div class="item"><span class="kind">154 write-up</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p2-factory/kills/graffiti-154/WRITEUP.md">WRITEUP.md</a><span class="note">Reading dependence and integer reduction.</span></div>
+        <div class="item"><span class="kind">154 certificate</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p2-factory/kills/graffiti-154/certificate.json">certificate.json</a><span class="note">Certified lollipop counterexamples.</span></div>
+        <div class="item"><span class="kind">154 checker</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p2-factory/kills/graffiti-154/check_graffiti154.py">check_graffiti154.py</a><span class="note">Exact integer checker.</span></div>
+        <div class="item"><span class="kind">Archive</span><a href="https://doi.org/10.5281/zenodo.21264100">Zenodo DOI 10.5281/zenodo.21264100</a><span class="note">Citable frozen archive of the wave-1 portfolio.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <p>No general minimality for Conjecture 143 is claimed below n = 37, although both mainstream average-distance readings are refuted as stated. Conjecture 154 is refuted only under the standard-deviation reading: under the mean-absolute-deviation reading, these instances provably do not violate the inequality. Its minimality claim is confined to the lollipop family.</p>
+      <p>The results have not been externally refereed. Corrections will be logged, dated, and never silent.</p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span>John Erlbacher</span>
+      <span class="muted">erlbacher.research@gmail.com</span>
+      <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
+      <a href="https://github.com/demonstrandum-research">GitHub</a>
+    </div>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Corrections are never silent &mdash; see <a href="/about/#corrections">the correction history</a>.</p>
+  </div>
+</footer>
+</body>
+</html>

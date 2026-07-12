@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Borsuk Conjecture 3, Disproved in Lean 4 &mdash; Demonstrandum</title>
+<meta name="description" content="Conjecture 3 of Brose, De Loera, L&oacute;pez-Campos &amp; Torres on lattice-diameter Borsuk partitions is false as stated &mdash; a four-point witness at d = 2, formalized and kernel-checked in Lean 4.">
+<link rel="canonical" href="https://demonstrandum-research.org/p/borsuk/">
+<meta property="og:title" content="A Discrete Borsuk Partition Conjecture, Disproved in Lean 4">
+<meta property="og:description" content="A four-point witness refutes Conjecture 3 as stated at d = 2; the counterexample is kernel-checked in Lean 4.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://demonstrandum-research.org/p/borsuk/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mastrow">
+      <h1 class="brand"><a href="/"><span class="wordmark">Demonstrandum</span><span class="byline">Machine-assisted mathematics &middot; <strong>John Erlbacher</strong></span></a></h1>
+      <nav class="site-nav">
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumb"><a href="/">Projects</a> &middot; <a href="/p/wave-1/">Feasibility study</a> &middot; <span>Discrete Borsuk partition</span></p>
+    <h1 class="page">A Discrete Borsuk Partition Conjecture, Disproved in Lean 4</h1>
+    <p class="muted small">11 June 2026 &middot; kernel-checked &middot; not externally refereed</p>
+
+    <section>
+      <p class="article-lede"><em>A four-point lattice set separates maximal discrete Borsuk number from the cube characterization proposed in Conjecture 3.</em></p>
+      <p>Conjecture 3 of Brose, De Loera, L&oacute;pez-Campos, and Torres is false as stated in dimension 2: an explicit four-point set has discrete Borsuk number 4, but its convex hull is not unimodularly equivalent to any lattice square. The witness and the failure of the printed biconditional are formalized in Lean&nbsp;4.30.0, making the small counterexample a kernel-checked refutation rather than a numerical observation.</p>
+      <p>The conjecture appears in <em>On Lattice Diameter Segments and A Discrete Borsuk Partition Problem</em> (arXiv:2508.20009 v1, posted 27 August 2025), where it characterizes bounded lattice sets whose discrete Borsuk number is 2<sup>d</sup>. The preprint was still v1-only on 11 June 2026, and no posted resolution was found. The authors were notified privately.</p>
+    </section>
+
+    <section>
+      <h2>The frozen statement</h2>
+      <p>The arXiv LaTeX source at <code>paper/sections/Borsuk.tex</code>, line 76, states: &ldquo;Let S &sub; Z^d be a bounded set. Then &beta;_Z(S) = 2^d if and only if conv(S) is unimodularly equivalent to a d-cube [0,m]^d for any m &isin; N.&rdquo;</p>
+    </section>
+
+    <section>
+      <h2>The result</h2>
+      <p>Let S<sub>A</sub> = {(0,0), (1,0), (0,1), (3,5)}. Every pairwise difference is primitive, so the lattice diameter is 1 and &beta;_Z(S<sub>A</sub>) = 4 = 2&sup2;. On the other hand, |conv(S<sub>A</sub>) &cap; Z&sup2;| = 7. Unimodular equivalence preserves lattice-point counts, while |[0,m]&sup2; &cap; Z&sup2;| = (m+1)&sup2; &ne; 7 for every m. Thus the d = 2 instance, and therefore the all-dimensions biconditional as printed, fails.</p>
+<pre><code>Borsuk.witnessA_kills_conjecture3
+Borsuk.conjecture3_counterexample
+Borsuk.conjecture3_false</code></pre>
+      <p>The Lean project contains no <code>sorry</code>, <code>admit</code>, added axiom, <code>native_decide</code>, or <code>unsafe</code>. The axiom audit reports exactly <code>[propext, Classical.choice, Quot.sound]</code>.</p>
+    </section>
+
+    <section>
+      <h2>Artifacts</h2>
+      <div class="shelfrow">
+        <div class="item"><span class="kind">Preprint</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/papers/borsuk/note.pdf">Discrete Borsuk counterexample</a><span class="note">The full preprint.</span></div>
+        <div class="item"><span class="kind">Lean project</span><a href="https://github.com/demonstrandum-research/artifacts/tree/main/problems/p3-moonshot/borsuk/lean">Kernel-checked project tree</a><span class="note">The witness, definitions, and axiom audit.</span></div>
+        <div class="item"><span class="kind">Reading kit</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p3-moonshot/borsuk/lean/READING-KIT.md">READING-KIT.md</a><span class="note">Rebuild and statement-fidelity guide.</span></div>
+        <div class="item"><span class="kind">Status</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p3-moonshot/borsuk/STATUS.md">STATUS.md</a><span class="note">Status and faithfulness report.</span></div>
+        <div class="item"><span class="kind">Archive</span><a href="https://doi.org/10.5281/zenodo.21264100">Zenodo DOI 10.5281/zenodo.21264100</a><span class="note">Citable frozen archive of the wave-1 portfolio.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <p>The refutation is of the biconditional as printed; the dimension-2 instance suffices because it quantifies over all dimensions. The witness does not refute the unstated full-set variant S = conv(S) &cap; Z^d. Designed follow-up witnesses B and C were stretch goals and are not claimed.</p>
+      <p>The kernel guarantees the Lean statements. Their correspondence with the paper's definitions is human-checked against its LaTeX and documented in the <a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p3-moonshot/borsuk/lean/READING-KIT.md">reading kit</a> and <a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p3-moonshot/borsuk/STATUS.md">status report</a>. The result has not been externally refereed. Corrections will be logged, dated, and never silent.</p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span>John Erlbacher</span>
+      <span class="muted">erlbacher.research@gmail.com</span>
+      <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
+      <a href="https://github.com/demonstrandum-research">GitHub</a>
+    </div>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Corrections are never silent &mdash; see <a href="/about/#corrections">the correction history</a>.</p>
+  </div>
+</footer>
+</body>
+</html>
