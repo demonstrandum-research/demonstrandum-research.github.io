@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sun's Conjecture 4.6(ii) on Sine Permanents, Refuted at p = 29 &mdash; Demonstrandum Research</title>
+<meta name="description" content="Part (ii) of Zhi-Wei Sun's Conjecture 4.6 on the signs of sine and cosecant permanents fails at p = 29, the first prime beyond Sun's published table.">
+<link rel="canonical" href="https://demonstrandum-research.org/p/sun-46/">
+<meta property="og:title" content="Sun's Conjecture 4.6(ii) on Sine Permanents, Refuted at p = 29">
+<meta property="og:description" content="Part (ii) of Conjecture 4.6 fails on both clauses at p = 29; part (i) is not refuted.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://demonstrandum-research.org/p/sun-46/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mastrow">
+      <h1 class="brand"><a href="/"><span class="wordmark">Demonstrandum</span><span class="byline">Machine-assisted mathematics &middot; <strong>John Erlbacher</strong></span></a></h1>
+      <nav class="site-nav">
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumb"><a href="/">Projects</a> &middot; <a href="/p/wave-1/">Feasibility study</a> &middot; <span>Sun's Conjecture 4.6(ii)</span></p>
+    <h1 class="page">Sun's Conjecture 4.6(ii) on Sine Permanents, Refuted at p = 29</h1>
+
+    <section>
+      <h2>Overview</h2>
+      <p>Conjecture 4.6 of Zhi-Wei Sun's <em>Arithmetic properties of some permanents</em> (arXiv:2108.07723v7) has two parts: a divisibility assertion for odd composite n, and two sign characterizations for odd primes. The integer-normalized sine and cosecant permanents s_n and s&prime;_p are those of the paper's Theorem 1.6.</p>
+      <p>Part (ii) is refuted as stated at p = 29, the first prime beyond Sun's table, where both sign clauses fail simultaneously. The values are certified through four algorithmically independent exact layers across five implementations, with independent recomputation audits.</p>
+      <p>The conjecture was posed in 2021, remained unchanged through v7 in 2022, and that version was still latest on 12 June 2026. Sun's table stops at p = 23, and neither sequence is in OEIS. The author was notified privately.</p>
+    </section>
+
+    <section>
+      <h2>The frozen statement</h2>
+      <p>The TeX source at <code>paper.tex</code>, line 1109, states: &ldquo;(i) If n&gt;1 is odd and composite, then s_n &equiv; 0 (mod n). (ii) Let p be an odd prime. Then s_p &lt; 0 &hArr; p &equiv; 5 (mod 12), and s&prime;_p &lt; 0 &hArr; p &equiv; 7 (mod 8).&rdquo;</p>
+    </section>
+
+    <section>
+      <h2>The result</h2>
+      <p>At p = 29, s_29 = 1,053,859 &gt; 0 although 29 &equiv; 5 (mod 12), while s&prime;_29 = &minus;4,806,838,304 &lt; 0 although 29 &equiv; 5 (mod 8) &ne; 7. Thus both clauses of part (ii) fail as stated.</p>
+      <p>Further failures occur at p = 41 and 53 for the mod-12 clause and at p = 61 for the mod-8 clause. Every computed value satisfies Sun's proved congruences s_p &equiv; (&minus;1)^((p+1)/2) and s&prime;_p &equiv; 1 (mod p).</p>
+    </section>
+
+    <section>
+      <h2>Artifacts</h2>
+      <div class="shelfrow">
+        <div class="item"><span class="kind">Preprint</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/papers/sun-46/note.pdf">Conjecture 4.6(ii) counterexample</a><span class="note">The full preprint.</span></div>
+        <div class="item"><span class="kind">Kill bundle</span><a href="https://github.com/demonstrandum-research/artifacts/tree/main/problems/p2-factory/kills/sun-46">Exact verification bundle</a><span class="note">The complete checker and certificate tree.</span></div>
+        <div class="item"><span class="kind">Write-up</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p2-factory/kills/sun-46/WRITEUP.md">WRITEUP.md</a><span class="note">Statement, calculations, and verification routes.</span></div>
+        <div class="item"><span class="kind">Certificate</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p2-factory/kills/sun-46/kill-certificate.json">kill-certificate.json</a><span class="note">The exact certified values.</span></div>
+        <div class="item"><span class="kind">Float sanity</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p2-factory/kills/sun-46/snippet_check.py">snippet_check.py</a><span class="note">Independent floating-point sanity check.</span></div>
+        <div class="item"><span class="kind">Archive</span><a href="https://doi.org/10.5281/zenodo.21264100">Zenodo DOI 10.5281/zenodo.21264100</a><span class="note">Citable frozen archive of the wave-1 portfolio.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <ul>
+        <li><b>Part (i) is not refuted.</b> It was tested for all 15 odd composite n &le; 65 and held in every case; it remains open.</li>
+        <li><b>No replacement sign law is claimed.</b> Values are certified only for primes p &le; 61 and odd composite n &le; 65.</li>
+        <li><b>No external review yet.</b> These results have not been externally refereed. Corrections will be logged, dated, never silent.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span>John Erlbacher</span>
+      <span class="muted">erlbacher.research@gmail.com</span>
+      <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
+      <a href="https://github.com/demonstrandum-research">GitHub</a>
+    </div>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Corrections are never silent &mdash; see <a href="/about/#corrections">the correction history</a>.</p>
+  </div>
+</footer>
+</body>
+</html>

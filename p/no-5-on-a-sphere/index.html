@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C(13) &ge; 36 for the &quot;No 5 on a Sphere&quot; Grid Problem &mdash; Demonstrandum Research</title>
+<meta name="description" content="A 36-point subset of {0,&hellip;,12}&sup3; with no five points on a common sphere or plane, improving the recorded lower bound C(12) &ge; 33 for AlphaEvolve problem 6.60.">
+<link rel="canonical" href="https://demonstrandum-research.org/p/no-5-on-a-sphere/">
+<meta property="og:title" content="C(13) &ge; 36 for the &quot;No 5 on a Sphere&quot; Grid Problem">
+<meta property="og:description" content="An explicit 36-point certificate establishes C(13) &ge; 36 for AlphaEvolve problem 6.60.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://demonstrandum-research.org/p/no-5-on-a-sphere/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mastrow">
+      <h1 class="brand"><a href="/"><span class="wordmark">Demonstrandum</span><span class="byline">Machine-assisted mathematics &middot; <strong>John Erlbacher</strong></span></a></h1>
+      <nav class="site-nav">
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumb"><a href="/">Projects</a> &middot; <a href="/p/wave-1/">Feasibility study</a> &middot; <span>No 5 on a sphere</span></p>
+    <h1 class="page">C(13) &ge; 36 for the &ldquo;No 5 on a Sphere&rdquo; Grid Problem</h1>
+
+    <section>
+      <h2>Overview</h2>
+      <p>Problem 6.60 in the AlphaEvolve repository of problems (arXiv:2511.02864) asks for strong upper and lower bounds on the largest subset of an n &times; n &times; n grid containing no five points on a common sphere or plane.</p>
+      <p>This project establishes C(13) &ge; 36 with an explicit centrally symmetric subset of {0,&hellip;,12}&sup3;. The certificate consists of 18 antipodal pairs on pairwise distinct central shells and is accepted by three independent exact routes &mdash; Python cofactor expansion, Python Bareiss elimination, and Rust &mdash; as well as a fourth checker written from scratch by an independent model. A seven-mutant suite exercises the verification boundary.</p>
+    </section>
+
+    <section>
+      <h2>The frozen problem</h2>
+      <p>The official problem page states: &ldquo;For n a natural number, let C(n) denote the size of the largest subset of [n]^3 = {1,&hellip;,n}^3 such that no 5 points lie on a sphere or a plane. Obtain upper and lower bounds for C(n) that are as strong as possible.&rdquo;</p>
+    </section>
+
+    <section>
+      <h2>The result</h2>
+      <p><b>Lower bound.</b> <em>C(13) &ge; 36.</em> For the exhibited set, each of the C(36,5) = 376,992 lifted 5&times;5 determinants with columns [x, y, z, x&sup2;+y&sup2;+z&sup2;, 1] is a nonzero exact integer. The minimum absolute determinant is 2.</p>
+      <p>The same checkers accept all six official AlphaEvolve record sets for n = 7,&hellip;,12, so the comparison uses the convention that produced the prior records.</p>
+    </section>
+
+    <section>
+      <h2>Prior record</h2>
+      <p>The paper and official repository list lower bounds only through n = 12, including C_6.60(12) &ge; 33 in November 2025. This gives the inherited baseline C(13) &ge; C(12) &ge; 33. To our knowledge, documented searches on 12 June 2026 found no public claim of C(13) &ge; 34.</p>
+    </section>
+
+    <section>
+      <h2>Artifacts</h2>
+      <div class="shelfrow">
+        <div class="item"><span class="kind">Preprint</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/papers/no5sphere-record/note.pdf">C(13) &ge; 36</a><span class="note">The full preprint.</span></div>
+        <div class="item"><span class="kind">Certificate</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p1-records/no-5-on-a-sphere-grid/certificates/record36_centralsym.json">record36_centralsym.json</a><span class="note">The explicit centrally symmetric 36-point set.</span></div>
+        <div class="item"><span class="kind">Checker</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p1-records/no-5-on-a-sphere-grid/code/check_cert.py">check_cert.py</a><span class="note">Route A exact certificate checker.</span></div>
+        <div class="item"><span class="kind">Problem</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p1-records/no-5-on-a-sphere-grid/PROBLEM.md">PROBLEM.md</a><span class="note">Frozen statement and problem record.</span></div>
+        <div class="item"><span class="kind">Write-up</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p1-records/no-5-on-a-sphere-grid/WRITEUP.md">WRITEUP.md</a><span class="note">Construction and verification account.</span></div>
+        <div class="item"><span class="kind">Archive</span><a href="https://doi.org/10.5281/zenodo.21264100">Zenodo DOI 10.5281/zenodo.21264100</a><span class="note">Citable frozen archive of the wave-1 portfolio.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <ul>
+        <li><b>This is a lower bound only.</b> C(13) = 36 is not claimed; 36 is not claimed maximal even empirically. The best upper bound remains the trivial 52.</li>
+        <li><b>The result is only for n = 13.</b> It makes no claim for other values of n.</li>
+        <li><b>The priority claim is scoped.</b> &ldquo;No public claim found&rdquo; is not a guarantee against unpublished concurrent work.</li>
+        <li><b>No external review yet.</b> These results have not been externally refereed. The authors were notified privately. Corrections will be logged, dated, never silent.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span>John Erlbacher</span>
+      <span class="muted">erlbacher.research@gmail.com</span>
+      <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
+      <a href="https://github.com/demonstrandum-research">GitHub</a>
+    </div>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Corrections are never silent &mdash; see <a href="/about/#corrections">the correction history</a>.</p>
+  </div>
+</footer>
+</body>
+</html>

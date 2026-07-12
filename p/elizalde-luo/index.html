@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Pattern-Avoidance Conjecture of Elizalde and Luo, Proved in Lean 4 &mdash; Demonstrandum Research</title>
+<meta name="description" content="The {1132, 3312} entry of Table 4 of Elizalde &amp; Luo's Pattern avoidance in nonnesting permutations &mdash; that the count is 3&#8319; &minus; 3&middot;2&#8319;&#8315;&sup1; + 1 &mdash; proved for all n and kernel-checked in Lean 4.">
+<link rel="canonical" href="https://demonstrandum-research.org/p/elizalde-luo/">
+<meta property="og:title" content="A Pattern-Avoidance Conjecture of Elizalde and Luo, Proved in Lean 4">
+<meta property="og:description" content="The {1132, 3312} entry of Elizalde and Luo's Table 4 is proved for all n and kernel-checked in Lean 4.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://demonstrandum-research.org/p/elizalde-luo/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mastrow">
+      <h1 class="brand"><a href="/"><span class="wordmark">Demonstrandum</span><span class="byline">Machine-assisted mathematics &middot; <strong>John Erlbacher</strong></span></a></h1>
+      <nav class="site-nav">
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumb"><a href="/">Projects</a> &middot; <a href="/p/wave-1/">Feasibility study</a> &middot; <span>Elizalde&ndash;Luo</span></p>
+    <h1 class="page">A Pattern-Avoidance Conjecture of Elizalde and Luo, Proved in Lean 4</h1>
+
+    <section>
+      <h2>Overview</h2>
+      <p>Table 4 of S. Elizalde and A. Luo's <em>Pattern avoidance in nonnesting permutations</em> records a conjectural enumeration for permutations of the multiset {1,1,2,2,&hellip;,n,n} avoiding both 1132 and 3312 under the paper's biconditional containment convention. The entry is cross-referenced to OEIS A168583.</p>
+      <p>The paper, published in 2025 as DMTCS 27:1, Permutation Patterns 2024, paper #13 (arXiv:2412.00336; DOI 10.46298/dmtcs.14885), reports that its conjectures were checked through n = 8. The conjecture table was unchanged and no proof was found in the literature during the June 2026 campaign.</p>
+      <p>This project resolves the entry for all n &ge; 1. Two complete, independently audited proofs &mdash; a recurrence and structural count, and an explicit bijection onto a ternary language &mdash; share a triple-audited core. The all-n statement is formalized and kernel-checked in Lean&nbsp;4.</p>
+    </section>
+
+    <section>
+      <h2>The frozen statement</h2>
+      <p>Table 4, headed &ldquo;Further research,&rdquo; prints the row <code>{1132,3312} &amp; 3^n&minus;3&middot;2^{n&minus;1}+1 &amp; A168583</code>, under the preamble &ldquo;All the conjectures have been checked for n up to 8.&rdquo;</p>
+      <p><b>Theorem.</b> <em>For every n &ge; 1, the number of nonnesting permutations of {1,1,2,2,&hellip;,n,n} avoiding 1132 and 3312 equals 3&#8319; &minus; 3&middot;2&#8319;&#8315;&sup1; + 1.</em></p>
+    </section>
+
+    <section>
+      <h2>The result</h2>
+      <p>The recurrence proof and the bijective proof share the FIFO normal form, sign-word coordinates for prefix-extremal labelings, and the characterization of avoiders by arc-sign constraints. Their prose explains the enumeration; it corroborates, but is not load-bearing for, the kernel claim.</p>
+<pre><code>declaration: ElizaldeLuo.elizalde_luo_1132_3312
+toolchain: leanprover/lean4:v4.30.0 with mathlib pinned
+statement: count = 3&#8319; &minus; 3&middot;2&#8319;&#8315;&sup1; + 1 for every n &ge; 1</code></pre>
+      <p>The axiom audit reports exactly <code>[propext, Classical.choice, Quot.sound]</code>, with no <code>sorryAx</code>.</p>
+    </section>
+
+    <section>
+      <h2>Corroborating computation</h2>
+      <p>Exhaustive cross-checks extend beyond the paper's stated range. Theorem A was checked on all 2,162,160 shape-permutation pairs at n = 7 and all 57,657,600 pairs at n = 8. The end-to-end bijection was checked on all 85,514 avoiders for n &le; 10, and the summation identity was checked exactly through n = 60. These computations corroborate the proof; they do not replace the kernel-checked theorem.</p>
+    </section>
+
+    <section>
+      <h2>Artifacts</h2>
+      <div class="shelfrow">
+        <div class="item"><span class="kind">Preprint</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/papers/elizalde-luo/note.pdf">Pattern-avoidance proof</a><span class="note">The full preprint.</span></div>
+        <div class="item"><span class="kind">Lean theorem</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p3-moonshot/elizalde-luo/lean/ElizaldeLuo/Main.lean">Main.lean</a><span class="note">The kernel-checked all-n theorem.</span></div>
+        <div class="item"><span class="kind">Axiom audit</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p3-moonshot/elizalde-luo/lean/scripts/AxiomCheck.lean">AxiomCheck.lean</a><span class="note">The theorem's audited kernel dependencies.</span></div>
+        <div class="item"><span class="kind">Reading kit</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p3-moonshot/elizalde-luo/lean/READING-KIT.md">READING-KIT.md</a><span class="note">Statement-fidelity record and reading guide.</span></div>
+        <div class="item"><span class="kind">Definitions</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p3-moonshot/elizalde-luo/DEFINITIONS.md">DEFINITIONS.md</a><span class="note">Frozen source quotations and conventions.</span></div>
+        <div class="item"><span class="kind">Enumerator</span><a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p3-moonshot/elizalde-luo/data/enumerator.py">enumerator.py</a><span class="note">Ground-truth exhaustive enumerator.</span></div>
+        <div class="item"><span class="kind">Archive</span><a href="https://doi.org/10.5281/zenodo.21264100">Zenodo DOI 10.5281/zenodo.21264100</a><span class="note">Citable frozen archive of the wave-1 portfolio.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <ul>
+        <li><b>The formal-to-informal bridge is human-checked.</b> The kernel guarantees the formal theorem as stated. That the Lean avoider set matches the convention in Table 4 is argued in the <a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p3-moonshot/elizalde-luo/lean/READING-KIT.md">reading kit</a> from the pinned quotations in the <a href="https://github.com/demonstrandum-research/artifacts/blob/main/problems/p3-moonshot/elizalde-luo/DEFINITIONS.md">frozen definitions</a>, with a kernel-checked small-n comparison against the paper's data &mdash; rigorous, but a human-audited step by nature.</li>
+        <li><b>No external review yet.</b> These results have not been externally refereed. The authors were notified privately. Corrections will be logged, dated, never silent.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span>John Erlbacher</span>
+      <span class="muted">erlbacher.research@gmail.com</span>
+      <a href="https://orcid.org/0009-0003-6851-4139">ORCID</a>
+      <a href="https://github.com/demonstrandum-research">GitHub</a>
+    </div>
+    <p class="fine">Code: MIT. Text &amp; data: CC BY 4.0. Corrections are never silent &mdash; see <a href="/about/#corrections">the correction history</a>.</p>
+  </div>
+</footer>
+</body>
+</html>

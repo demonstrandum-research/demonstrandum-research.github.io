@@ -37,21 +37,36 @@
     </section>
 
     <section>
-      <h2>The results</h2>
+      <h2>Individual results</h2>
+      <p>Verification grades are defined in the <a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">master catalog</a>.</p>
       <div class="table-scroll">
         <table>
-          <thead><tr><th>Result</th><th>Grade</th><th>Artifact</th></tr></thead>
+          <thead><tr><th>Result</th><th>Grade</th></tr></thead>
           <tbody>
-            <tr><td>Elizalde&ndash;Luo {1132, 3312} conjecture &mdash; proved in Lean&nbsp;4</td><td>kernel</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/elizalde-luo">paper</a></td></tr>
-            <tr><td>Discrete Borsuk Conjecture&nbsp;3 (arXiv:2508.20009) &mdash; refuted in Lean&nbsp;4</td><td>kernel</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/borsuk">paper</a></td></tr>
-            <tr><td>C(13)&nbsp;&ge;&nbsp;36 record (&ldquo;no 5 on a sphere&rdquo;) &mdash; improves C(12)&nbsp;&ge;&nbsp;33</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/no5sphere-record">paper</a></td></tr>
-            <tr><td>Sun Conjecture&nbsp;4.6(ii) (arXiv:2108.07723) &mdash; refuted at p&nbsp;=&nbsp;29</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/sun-46">paper</a></td></tr>
-            <tr><td>Graffiti Conjectures&nbsp;143 and&nbsp;154 (standard-deviation reading) &mdash; refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/tree/main/papers/graffiti-143-154">paper</a></td></tr>
-            <tr><td>IRIS Conjecture&nbsp;6.1 (&ldquo;NuevaMirada&rdquo;) &mdash; refuted as printed</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>TxGraffiti / Davila Conjecture&nbsp;9 &mdash; refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Pandey parity conjecture &mdash; refuted in both directions</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Solubilizer Conjectures A.1, A.13, and A.16 (arXiv:2412.16177) &mdash; refuted</td><td>dual-checker / audit-panel</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
-            <tr><td>Koch&ndash;Narayan Conjecture&nbsp;1 &mdash; refuted</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a></td></tr>
+            <tr><td><a href="/p/elizalde-luo/">A Pattern-Avoidance Conjecture of Elizalde and Luo, Proved in Lean 4</a> &mdash; the {1132, 3312} count is proved for all n and kernel-checked.</td><td>kernel</td></tr>
+            <tr><td><a href="/p/borsuk/">A Discrete Borsuk Partition Conjecture, Disproved in Lean 4</a> &mdash; a four-point witness at d = 2 refutes Conjecture 3 as stated.</td><td>kernel</td></tr>
+            <tr><td><a href="/p/no-5-on-a-sphere/">C(13) &ge; 36 for the &ldquo;No 5 on a Sphere&rdquo; Grid Problem</a> &mdash; an explicit 36-point certificate improves the inherited lower bound 33.</td><td>dual-checker</td></tr>
+            <tr><td><a href="/p/sun-46/">Sun's Conjecture 4.6(ii) on Sine Permanents, Refuted at p = 29</a> &mdash; both sign clauses fail at the first prime beyond Sun's table; part (i) is not refuted.</td><td>dual-checker</td></tr>
+            <tr><td><a href="/p/graffiti-143-154/">Two Graffiti Conjectures on Graph Eigenvalues, Refuted</a> &mdash; 143 fails under both average-distance conventions, and 154 fails under the standard-deviation reading.</td><td>dual-checker</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Further refutations</h2>
+      <p>The weight of these results varies. This group includes machine-generated conjectures and conjectures from very fresh papers; the three solubilizer statements are LLM-generated appendix conjectures and are recorded at erratum-note scale.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Result</th><th>Grade</th><th>Artifacts</th></tr></thead>
+          <tbody>
+            <tr><td>IRIS Conjecture 6.1 (&ldquo;NuevaMirada&rdquo;) is refuted as printed by exactly five 10-face counterexamples, with none smaller; the cleanest has p3 = 4, p5 = 3, p7 = 3, while the integer-rounded weakening survives the census through 16 faces.</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a> &middot; <a href="https://github.com/demonstrandum-research/artifacts/tree/main/problems/p0-iris">problem tree</a></td></tr>
+            <tr><td>TxGraffiti / Davila Conjecture 9 (arXiv:2406.19231v2), that connected cubic diamond-free graphs satisfy Z(G) &le; &gamma;(G)+2, is refuted as stated by G14 at n = 14, where Z = 7 = &gamma;+3; the proved claw-free sibling is untouched.</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a> &middot; <a href="https://github.com/demonstrandum-research/artifacts/tree/main/problems/p2-factory/kills/davila-conj9">problem tree</a></td></tr>
+            <tr><td>Pandey's parity conjecture (arXiv:2601.03293 v1), that I(GP(n,k)) is real-rooted iff k is even, is refuted as stated in both directions outside the author's tested window: GP(9,2) is not real-rooted; GP(7,3) and GP(3,1) are; and GP(7,2) is isomorphic to GP(7,3).</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a> &middot; <a href="https://github.com/demonstrandum-research/artifacts/tree/main/problems/p2-factory/kills/pandey-parity">problem tree</a></td></tr>
+            <tr><td>Koch&ndash;Narayan Conjecture 1 (arXiv:2511.01719 v1), on maximal bipartite graphs with a unique minimum dominating set, is refuted as stated at n = 13, &gamma; = 4, with s = 22 &gt; 21 = m(13,4); the &gamma; = 3 strip is not refuted.</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a> &middot; <a href="https://github.com/demonstrandum-research/artifacts/tree/main/problems/p2-factory/kills/koch-narayan">problem tree</a></td></tr>
+            <tr><td>Solubilizer Conjecture A.1 is refuted as stated at G = A5 with x a 5-cycle, where Sol = D10 has no nontrivial normal subgroup.</td><td>dual-checker</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a> &middot; <a href="https://github.com/demonstrandum-research/artifacts/tree/main/problems/p2-factory/kills/solubilizer-a1">problem tree</a></td></tr>
+            <tr><td>Solubilizer Conjecture A.13 is refuted as stated at G = A5 &times; S3.</td><td>audit-panel</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a> &middot; <a href="https://github.com/demonstrandum-research/artifacts/tree/main/problems/p2-factory/kills/solubilizer-a13">problem tree</a></td></tr>
+            <tr><td>Solubilizer Conjecture A.16 is refuted as stated at G = A5 &times; S4, where Sol = D10 &times; S4 has derived length 3 and is not metabelian.</td><td>audit-panel</td><td><a href="https://github.com/demonstrandum-research/artifacts/blob/main/RESULTS.md">RESULTS.md</a> &middot; <a href="https://github.com/demonstrandum-research/artifacts/tree/main/problems/p2-factory/kills/solubilizer-a16">problem tree</a></td></tr>
           </tbody>
         </table>
       </div>
