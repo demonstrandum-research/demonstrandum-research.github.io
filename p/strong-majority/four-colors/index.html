@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Four Colors: the Mixed Degree-{3,4} Case &mdash; Demonstrandum Research</title>
-<meta name="description" content="Published cubic and 4-regular strong-majority bounds, re-proved and machine-checked in Lean; the new mixed degree-{3,4} improvement from five colors to four remains one descent lemma from complete.">
+<meta name="description" content="A kernel-checked four-color strong-majority theorem for graphs with degrees in {3,4} and at most two degree-3 vertices &mdash; the first bound of four to reach into the mixed class &mdash; plus a machine-checked proof of the known 4-regular case; the general mixed case remains one descent lemma from complete.">
 <link rel="canonical" href="https://demonstrandum-research.org/p/strong-majority/four-colors/">
 <meta property="og:title" content="Four Colors: the Mixed Degree-{3,4} Case">
-<meta property="og:description" content="Published cubic and 4-regular bounds, re-proved and machine-checked; the new mixed degree-{3,4} improvement from five colors to four remains one descent lemma from complete.">
+<meta property="og:description" content="A kernel-checked four-color theorem for degrees {3,4} with at most two degree-3 vertices &mdash; the first bound of four to reach into the mixed class; the general mixed case remains one descent lemma from complete.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://demonstrandum-research.org/p/strong-majority/four-colors/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -29,22 +29,20 @@
   <div class="wrap">
     <p class="crumb"><a href="/">Projects</a> &middot; <a href="/p/strong-majority/">Strong Majority Edge-Coloring</a> &middot; Four Colors</p>
     <h1 class="page">Four Colors: the Mixed Degree-{3,4} Case</h1>
-    <p class="muted small">12 July 2026 &middot; known sub-cases kernel-checked &middot; mixed case conditional &middot; not externally refereed</p>
+    <p class="muted small">13 July 2026 (updated; first published 12 July) &middot; 4-regular and two-degree-3-vertex theorems kernel-checked &middot; general mixed case conditional &middot; not externally refereed</p>
 
     <section>
-      <p class="article-lede"><em>A different rung of the same ladder: published cubic and 4-regular bounds are re-proved and machine-checked, while the new mixed degree-{3,4} improvement from five colors to four remains one descent lemma from completion.</em></p>
+      <p class="article-lede"><em>A different rung of the same ladder: two four-color theorems are now kernel-checked &mdash; the known 4-regular case, re-proved by a new argument, and a new unconditional theorem for graphs with at most two degree-3 vertices, the first bound of four to reach into the mixed degree-{3,4} class. The general mixed case, with any number of degree-3 vertices, remains one descent lemma from completion.</em></p>
     </section>
 
     <section>
       <h2>The mixed degree-{3,4} target</h2>
-      <p>The target <code>R4_three_four</code> is Maj&prime;(G) &le; 4 for every finite simple graph whose degrees all lie in {3,4}. Its genuinely new mathematical ground is exactly the mixed class &mdash; graphs carrying both a degree-3 and a degree-4 vertex. The best previously published general bound there is Maj&prime;(G) &le; 5, by Theorem 2 of <a href="https://arxiv.org/abs/2607.00212">Antoniuk&ndash;Prorok&ndash;Salia, arXiv:2607.00212</a>; to our knowledge, closing the descent core would give the first bound of 4 for that class, a 5 &rarr; 4 improvement.</p>
+      <p>The target <code>R4_three_four</code> is Maj&prime;(G) &le; 4 for every finite simple graph whose degrees all lie in {3,4}. Its genuinely new mathematical ground is exactly the mixed class &mdash; graphs carrying both a degree-3 and a degree-4 vertex. The best previously published general bound there is Maj&prime;(G) &le; 5, by Theorem 2 of <a href="https://arxiv.org/abs/2607.00212">Antoniuk&ndash;Prorok&ndash;Salia, arXiv:2607.00212</a>; to our knowledge, closing the descent core would give the first bound of 4 for the whole class, a 5 &rarr; 4 improvement.</p>
       <p>The pure sub-cases were already published. Cubic graphs satisfy the four-color bound by <a href="https://arxiv.org/abs/2605.23828">KKPW Proposition 15</a> and independently by <a href="https://arxiv.org/abs/2607.00212">APS Theorem 4</a>; 4-regular graphs satisfy it by <a href="https://arxiv.org/abs/2605.23828">KKPW Proposition 21</a>. The mixed class lies outside those hypotheses: degree 4 is not divisible by 3, degree 3 is odd, and APS Theorem 4 excludes degree-4 vertices.</p>
-      <p>Strong majority edge-coloring is a 2026 pen-and-paper concept. To our knowledge, no prior Lean or mathlib formalization of Maj&prime; or Conjecture 14 exists. The cubic and 4-regular re-proofs are therefore the first machine-checked strong-majority edge-coloring results; this is a formalization first, not a claim that their mathematics was open.</p>
+      <p>Strong majority edge-coloring is a 2026 pen-and-paper concept, and apart from this program's own <a href="/p/strong-majority/">five-color verification</a>, we know of no Lean or mathlib formalization of Maj&prime; or Conjecture 14. The theorems on this page are, to our knowledge, the first machine-checked strong-majority bounds of <em>four</em>; where the underlying mathematics was already published, we say so and claim only the formalization.</p>
       <p>The round-13 gate recorded 105 declarations in the supporting inventory. Its sorry-free declarations were axiom-audited over <code>Maj5Base</code> and mathlib <code>8f9d9cff</code>; no report exceeded <code>[propext, Classical.choice, Quot.sound]</code>.</p>
-<!-- CONDITIONAL:DESCENT-STATUS START &mdash; orchestrator flips at publish. Current on-disk truth = OPEN. -->
-<p>Kernel-complete today are re-proofs of the two published pure sub-cases just credited: cubic and 4-regular. The genuinely new mixed degree-{3,4} bound is complete modulo one open combinatorial lemma, <code>strict_descent_of_no_clean_transversal</code>; since round 13 this descent core is consumed only in the degree-3 regime. Accordingly, <code>R4_three_four</code> is not yet kernel-complete, and the full KKPW Conjecture 14 remains open.</p>
-<!-- CONDITIONAL:DESCENT-STATUS ALT (if the lemma has closed by publish, replace the paragraph above with this one) -->
-<!-- <p>The descent core has closed: <code>R4_three_four</code> is kernel-complete, so every finite simple graph whose degrees lie in {3,4} has Maj&prime;(G) &le; 4. For the genuinely new mixed class, the improvement from the previously published general bound of 5 to 4 therefore stands unconditionally. The cubic and 4-regular sub-cases remain re-proofs of published results, and this theorem does not settle KKPW Conjecture 14, which quantifies over all admissible graphs.</p> -->
+<!-- CONDITIONAL:DESCENT-STATUS START &mdash; flipped 2026-07-13 to the unconditional t<=2 state. On-disk truth: R4_three_four_t2 kernel-clean (commit 121821a); general descent still OPEN. -->
+<p>Since first publication of this article, part of the gap has closed. The theorem <code>R4_three_four_t2</code> is kernel-complete and unconditional: every finite simple graph with all degrees in {3,4} and <em>at most two</em> degree-3 vertices satisfies Maj&prime;(G) &le; 4. Graphs with exactly two degree-3 vertices are mixed, so to our knowledge this is the first four-color theorem covering any part of the mixed class; for those graphs the best published bound was 5. Its proof bypasses the descent core: a migration argument shows some minimal split has clean placements everywhere, and the rest is the proved calculus below. The scope is a slice, not the class: for graphs with four or more degree-3 vertices <code>R4_three_four</code> still rests on the open combinatorial lemma <code>strict_descent_of_no_clean_transversal</code>, consumed only in the degree-3 regime, and the full KKPW Conjecture 14 remains open. Also kernel-complete is the 4-regular case credited above, as a re-proof.</p>
 <!-- CONDITIONAL:DESCENT-STATUS END -->
     </section>
 
@@ -91,7 +89,7 @@
       <h2>Open: the descent core</h2>
       <p>The remaining lemma, <code>strict_descent_of_no_clean_transversal</code>, says the following in plain language. If a split of a connected, class-II, degrees-{3,4} graph admits no clean transversal, then another split exists with strictly smaller total odd-cycle count. A clean transversal chooses one cap-3-clean vertex from each odd cycle in one half without containing an odd cycle of the cross half in full.</p>
       <p>To our knowledge, no known theorem implies either this descent lemma or the clean-transversal lemma. The STRIKE-B search covered Euler partitions; equitable and evenly-equitable edge colorings after de Werra, Hilton, and Erzurumluo&#287;lu&ndash;Rodger; oddness of cubic graphs after Huck&ndash;Kochol and Steffen; even 2-factorizations and even cycle decompositions after Markstr&#246;m; and compatible Euler tours after Kotzig, Fleischner, and Sabidussi.</p>
-      <p>The missing statement is best viewed as a parity-controlled compatible-rerouting theorem at the boundary of the cycle-double-cover circle. Closing it would finish <code>R4_three_four</code>.</p>
+      <p>The missing statement is best viewed as a parity-controlled compatible-rerouting theorem at the boundary of the cycle-double-cover circle. Closing it would finish <code>R4_three_four</code> in general; the at-most-two-degree-3-vertices case no longer waits on it.</p>
     </section>
 
     <section>
@@ -99,7 +97,7 @@
       <div class="shelfrow">
         <div class="item"><span class="kind">Archive</span><a href="LINK-PENDING-ARCHIVE">Zenodo archive</a><span class="note">Versioned paper, source, and audit materials; packaging is pending.</span></div>
         <div class="item"><span class="kind">Reading kit</span><a href="LINK-PENDING-READING-KIT">Reading kit + rebuild instructions</a><span class="note">Statement-fidelity record, pinned environment, and clean rebuild procedure; packaging is pending.</span></div>
-        <div class="item"><span class="kind">Lean statement</span><a href="LINK-PENDING-LEAN">Pins2.lean</a><span class="note">The audited statement file and dependency chain; release packaging is pending.</span></div>
+        <div class="item"><span class="kind">Lean statement</span><a href="LINK-PENDING-LEAN">Pins2.lean + Pins3.lean</a><span class="note">The audited statement files &mdash; the toolkit and conditional route (Pins2) and the unconditional two-degree-3-vertex theorem (Pins3); release packaging is pending.</span></div>
         <div class="item"><span class="kind">Census</span><a href="LINK-PENDING-CENSUS">Census and falsification evidence</a><span class="note">Exact witnesses, search scripts, and evidence tables; packaging is pending.</span></div>
         <div class="item"><span class="kind">Related</span><a href="/p/strong-majority/">Strong Majority Edge-Coloring</a><span class="note">The flagship five-color theorem, definitions, verification record, and limitations.</span></div>
         <div class="item"><span class="kind">Development record</span><a href="/p/strong-majority/two-routes/">Two Routes to Five Colors</a><span class="note">The earlier companion chronicle of construction, failed routes, and audit checks.</span></div>
